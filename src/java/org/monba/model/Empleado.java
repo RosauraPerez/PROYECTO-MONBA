@@ -18,6 +18,12 @@ public class Empleado {
     private String comentario;
     private String nombre_expediente;
     private byte[] expediente;
+    private String nombre_nomina;
+    private byte[] pdf_nomina;
+    private String nombre_alta;
+    private byte[] pdf_alta;
+    private String nombre_vacaciones;
+    private byte[] pdf_vacaciones;
     private String tipo_vehiculo;
     private String num_placa;
     private Persona Persona;
@@ -26,7 +32,7 @@ public class Empleado {
     public Empleado() {
     }
 
-    public Empleado(int id_empleado, String codigo, String fecha_ingreso, String puesto, String correo_electronico, int estatus, String comentario, String nombre_expediente, byte[] expediente, String tipo_vehiculo, String num_placa, Persona Persona, Usuario Usuario) {
+    public Empleado(int id_empleado, String codigo, String fecha_ingreso, String puesto, String correo_electronico, int estatus, String comentario, String nombre_expediente, byte[] expediente, String nombre_nomina, byte[] pdf_nomina, String nombre_alta, byte[] pdf_alta, String nombre_vacaciones, byte[] pdf_vacaciones, String tipo_vehiculo, String num_placa, Persona Persona, Usuario Usuario) {
         this.id_empleado = id_empleado;
         this.codigo = codigo;
         this.fecha_ingreso = fecha_ingreso;
@@ -36,6 +42,12 @@ public class Empleado {
         this.comentario = comentario;
         this.nombre_expediente = nombre_expediente;
         this.expediente = expediente;
+        this.nombre_nomina = nombre_nomina;
+        this.pdf_nomina = pdf_nomina;
+        this.nombre_alta = nombre_alta;
+        this.pdf_alta = pdf_alta;
+        this.nombre_vacaciones = nombre_vacaciones;
+        this.pdf_vacaciones = pdf_vacaciones;
         this.tipo_vehiculo = tipo_vehiculo;
         this.num_placa = num_placa;
         this.Persona = Persona;
@@ -114,6 +126,54 @@ public class Empleado {
         this.expediente = expediente;
     }
 
+    public String getNombre_nomina() {
+        return nombre_nomina;
+    }
+
+    public void setNombre_nomina(String nombre_nomina) {
+        this.nombre_nomina = nombre_nomina;
+    }
+
+    public byte[] getPdf_nomina() {
+        return pdf_nomina;
+    }
+
+    public void setPdf_nomina(byte[] pdf_nomina) {
+        this.pdf_nomina = pdf_nomina;
+    }
+
+    public String getNombre_alta() {
+        return nombre_alta;
+    }
+
+    public void setNombre_alta(String nombre_alta) {
+        this.nombre_alta = nombre_alta;
+    }
+
+    public byte[] getPdf_alta() {
+        return pdf_alta;
+    }
+
+    public void setPdf_alta(byte[] pdf_alta) {
+        this.pdf_alta = pdf_alta;
+    }
+
+    public String getNombre_vacaciones() {
+        return nombre_vacaciones;
+    }
+
+    public void setNombre_vacaciones(String nombre_vacaciones) {
+        this.nombre_vacaciones = nombre_vacaciones;
+    }
+
+    public byte[] getPdf_vacaciones() {
+        return pdf_vacaciones;
+    }
+
+    public void setPdf_vacaciones(byte[] pdf_vacaciones) {
+        this.pdf_vacaciones = pdf_vacaciones;
+    }
+
     public String getTipo_vehiculo() {
         return tipo_vehiculo;
     }
@@ -146,26 +206,6 @@ public class Empleado {
         this.Usuario = Usuario;
     }
 
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("Empleado{");
-        sb.append("id_empleado:").append(id_empleado);
-        sb.append(", codigo:").append(codigo);
-        sb.append(", fecha_ingreso:").append(fecha_ingreso);
-        sb.append(", puesto:").append(puesto);
-        sb.append(", correo_electronico:").append(correo_electronico);
-        sb.append(", estatus:").append(estatus);
-        sb.append(", comentario:").append(comentario);
-        sb.append(", nombre_expediente:").append(nombre_expediente);
-        sb.append(", expediente:").append(expediente);
-        sb.append(", tipo_vehiculo:").append(tipo_vehiculo);
-        sb.append(", num_placa:").append(num_placa);
-        sb.append(", Persona:").append(Persona);
-        sb.append(", Usuario:").append(Usuario);
-        sb.append('}');
-        return sb.toString();
-    }
     
     
 }
