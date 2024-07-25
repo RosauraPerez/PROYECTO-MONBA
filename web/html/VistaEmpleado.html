@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Registro de Empleado</title>
+        <!-- Bootstrap CSS -->
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+        <!-- Boxicons CSS -->
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+        <!-- Bootstrap Icons CSS -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+        <!-- Custom CSS -->
+        <link href="../style/style_administrador.css" rel="stylesheet" type="text/css"/>
+        <style>
+            body {
+                background-color: #1f3f6d;
+            }
+            .container {
+                background-color: white;
+                padding: 20px;
+                border-radius: 10px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.10);
+            }
+            .alert-warning {
+                width: 1160px;
+                height: 45px;
+                background-color: #BDBDBD;
+                color: #1f3f6d;
+            }
+            .btn-primary {
+                background-color: #1f3f6d;
+                border: none;
+            }
+            .btn-warning {
+                background-color: #9eb63c;
+                border: none;
+            }
+            .form-control, .form-control-file {
+                border: 1px solid #9eb63c;
+            }
+            label {
+                color: #1f3f6d;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container mt-5">
+            <form>
+                <h5 class="alert alert-warning text-center">Datos Personales:</h5>
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label for="nombres">Nombre(s):</label>
+                        <input type="text" class="form-control" id="nombres">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="apellido_paterno">Apellido Paterno:</label>
+                        <input type="text" class="form-control" id="apellido_paterno">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="apellido_materno">Apellido Materno:</label>
+                        <input type="text" class="form-control" id="apellido_materno">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="fecha_nacimiento">Fecha Nacimiento:</label>
+                        <input type="date" class="form-control" id="fecha_nacimiento">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="curp">CURP:</label>
+                        <input type="text" class="form-control" id="curp">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="rfc">RFC:</label>
+                        <input type="text" class="form-control" id="rfc">
+                    </div>
+                </div>
+                <h5 class="alert alert-warning text-center">Expediente:</h5>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="acta_nacimiento">Expediente del empleado:</label>
+                        <input type="file" class="form-control-file" id="acta_nacimiento">
+                    </div>
+                </div>
+                <h5 class="alert alert-warning text-center">Otros Documentos:</h5>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="alta_imss_empleado">Alta del IMSS del Empleado:</label>
+                        <input type="file" class="form-control-file" id="alta_imss_empleado">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="nomina">Nómina:</label>
+                        <input type="file" class="form-control-file" id="nomina">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="solicitud_vacaciones">Formato de Solicitud de Vacaciones:</label>
+                        <input type="file" class="form-control-file" id="solicitud_vacaciones">
+                    </div>
+                </div>
+                <div class="text-center">
+                    <button type="reset" class="btn btn-primary btn-md font-weight-bold font-italic"><i class="bi bi-bootstrap-reboot"></i> Limpiar</button>
+                    <button type="button" class="btn btn-warning btn-md font-weight-bold font-italic" onclick="validarFormularioModificar()"><i class='bi bi-pencil-square fa-lg'></i> Modificar </button>
+                </div>
+            </form>
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    </body>
+</html>
