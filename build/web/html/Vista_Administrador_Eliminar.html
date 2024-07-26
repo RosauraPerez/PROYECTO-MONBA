@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Empleados</title>
+        <link href="../style/style_manifiestos_1.css" rel="stylesheet" type="text/css"/>
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    </head>
+    <body class="fondo">
+        <div class="sidebar">
+            <div class="logo_content">
+                <div class="logo">
+                    <i class="bi bi-bug-fill"></i>
+                    <div class="logo_name">MONBA</div>
+                </div>
+                <i class='bx bx-menu' id="btn"></i>
+            </div>
+            <div class="src">
+                <i class='bx bx-search'></i>
+                <input type="text" placeholder="Buscar..">
+            </div>
+            <ul>
+                <li>
+                    <a href="html/VistaAdministrador_Agregar.html">
+                        <i class="bi bi-person-fill-add"></i>
+                        <span class="link_name">Agregar Empleado</span>
+                    </a>
+                    <span class="tooltip">Agregar Empleado</span>
+                </li>
+                <li>
+                    <a href="html/VistaAdministrador_Eliminar.html">
+                        <i class="bi bi-person-fill-dash"></i>
+                        <span class="link_name">Eliminar Empeado</span>
+                    </a>
+                    <span class="tooltip">Eliminar Empeado</span>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="bi bi-house-gear-fill"></i>
+                        <span class="link_name">Configuración Perfil</span>
+                    </a>
+                    <span class="tooltip">Configuración Perfil</span>
+                </li>
+            </ul>
+        </div>
+
+
+        <div class="home_content">
+            <h2 class="encabezado_modulo">MÓDULO EMPLEADOS</h2>
+            <div class="container mt-5">
+                <div class="d-flex">
+                    <h2 class="mb-4 subtitulo_modulo">Catálogo de Bajas de Empleados</h2>
+                    
+                </div>
+                <table class="table table-bordered table-hover">
+                    <thead class="tabla_encabezado">
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Apellido Paterno</th>
+                            <th>Apellido Materno</th>
+                            <th>Puesto</th>
+                            <th>Causa de la baja</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody class="tabla_cuerpo">
+                        <tr>
+                            <td>Juan</td>
+                            <td>Pérez</td>
+                            <td>García</td>
+                            <td>Operador</td>
+                            <td>Limite de faltas excedido</td>
+                            <td><button type="button" class='btn btn-success btn-md font-weight-bold' onclick=""> <i class="bi bi-check-circle-fill"></i> Activar </button></td>
+                        </tr>
+                        <tr>
+                            <td>María</td>
+                            <td>Gómez</td>
+                            <td>López</td>
+                            <td>Molinero</td>
+                            <td>Renuncia voluntaria</td>
+                            <td><button type="button" class='btn btn-success btn-md font-weight-bold' onclick=""> <i class="bi bi-check-circle-fill"></i> Activar </button></td>
+                        </tr>
+                        <tr>
+                            <td>Carlos</td>
+                            <td>Rodríguez</td>
+                            <td>Martínez</td>
+                            <td>Administrativo</td>
+                            <td>Limite de faltas excedido</td>
+                            <td><button type="button" class='btn btn-success btn-md font-weight-bold' onclick=""> <i class="bi bi-check-circle-fill"></i> Activar </button></td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script src="../js/nav_bar.js" type="text/javascript"></script>
+    </body>
+</html>
+

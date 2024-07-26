@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Manifiestos</title>
+        <link href="style/empleado.css" rel="stylesheet" type="text/css"/>
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    </head>
+    <body>
+        <div class="sidebar">
+            <div class="logo_content">
+                <div class="logo">
+                    <i class="bi bi-bug-fill"></i>
+                    <div class="logo_name">MONBA</div>
+                </div>
+                <i class='bx bx-menu' id="btn"></i>
+            </div>
+            <div class="src">
+                <i class='bx bx-search'></i>
+                <input type="text" placeholder="Buscar..">
+            </div>
+            <ul>
+                <li>
+                    <a href="html/VistaAdministrador_Agregar.html">
+                        <i class="bi bi-person-fill-add"></i>
+                        <span class="link_name">Agregar Empleado</span>
+                    </a>
+                    <span class="tooltip">Agregar Empleado</span>
+                </li>
+                <li>
+                    <a href="html/VistaAdministrador_Eliminar.html">
+                        <i class="bi bi-person-fill-dash"></i>
+                        <span class="link_name">Eliminar Empeado</span>
+                    </a>
+                    <span class="tooltip">Eliminar Empeado</span>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="bi bi-house-gear-fill"></i>
+                        <span class="link_name">Configuración Perfil</span>
+                    </a>
+                    <span class="tooltip">Configuración Perfil</span>
+                </li>
+            </ul>
+        </div>
+        
+        <div class="home_content">
+            <img class="imagenLogo" src="img/logo.png" alt=""/>
+        </div>
+        <script>
+            let btn = document.querySelector('#btn');
+            let sidebar = document.querySelector('.sidebar');
+            let srcBtn = document.querySelector('.bx-search');
+
+            btn.onclick = function () {
+                sidebar.classList.toggle('active');
+            }
+            srcBtn.onclick = function () {
+                sidebar.classList.toggle('active');
+            }
+        </script>
+    </body>
+</html>
