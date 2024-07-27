@@ -163,3 +163,52 @@ function buscarEmpleados() {
 
     mostrarEmpleados(empleadosFiltrados);
 }
+
+
+
+// Funcion para el pdf
+let input = document.querySelector('#pdfInput').addEventListener('change', function (event) {
+    const file = event.target.files[0]
+    if (file && file.type === 'application/pdf') {
+        if (getFileSize(file) <= 5) {
+            const reader = new FileReader()
+            reader.onload = function (e) {
+                visualizePdf(e.target.result)
+            }
+            reader.readAsDataURL(file)
+        } else {
+            alert("Archivo muy pesado")
+            event.value = ''
+        }
+    } else {
+        alert('Este archivo no es un PDF')
+    }
+})
+
+function getFileSize(file) {
+    let fileSizeInBytes = file.size
+    let fileSizeInKB = (fileSizeInBytes / 1024).toFixed(2)
+    let fileSizeInMB = (fileSizeInKB / 1024).toFixed(2)
+    return fileSizeInMB
+}
+
+function visualizePdf(pdfData) {
+    let pdf = pdfData
+    if (pdf.startsWith("data:application/pdf;base64,")) {
+        pdf = pdf.replace('data:application/pdf;base64,', "")
+    }
+
+    let binaryString = window.atob(pdf)
+    let len = binaryString.length
+    let bytes = new Uint8Array(len)
+    for (let i = 0; i < len; i++) {
+        bytes[i] = binaryString.charCodeAt(i)
+    }
+
+    let blob = new Blob([bytes], { type: 'application/pdf' })
+
+    var url = URL.createObjectURL(blob)
+
+    const frame = document.querySelector('#pdfViwer')
+    frame.src = url
+}
