@@ -225,8 +225,8 @@ public class ControllerEmpleado {
         cstm.setBytes(26, e.getPdf_nomina());
         cstm.setString(27, e.getNombre_alta());
         cstm.setBytes(28, e.getPdf_alta());
-        cstm.setString(29, e.getNombre_formato());
-        cstm.setBytes(30, e.getPdf_formato());
+        cstm.setString(29, e.getNombre_vacaciones());
+        cstm.setBytes(30, e.getPdf_vacaciones());
 
         cstm.setString(31, e.getTipo_vehiculo());
         cstm.setString(32, e.getNum_placa());
