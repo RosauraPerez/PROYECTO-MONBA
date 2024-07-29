@@ -26,53 +26,54 @@ import org.monba.model.Usuario;
 public class ControllerEmpleado {
 
     public List<Empleado> getAllActivos() throws ClassNotFoundException, SQLException, IOException {
-        //Generar la consulta
+        // Generar la consulta
         String query = "SELECT * FROM vista_empleados WHERE estatus = 1";
 
-        //Conectarse a la BD
+        // Conectarse a la BD
         ConexionMySQL connMySQL = new ConexionMySQL();
 
-        //Abrir la conexion
+        // Abrir la conexion
         Connection conn = connMySQL.open();
-        //Crear el objeto que lleva la sentencia a la BD
+        // Crear el objeto que lleva la sentencia a la BD
         PreparedStatement pstmt = conn.prepareStatement(query);
-        //Se ejecuta la sentencia y se recibe el resultado
+        // Se ejecuta la sentencia y se recibe el resultado
         ResultSet rs = pstmt.executeQuery();
 
         List<Empleado> empleados = new ArrayList<>();
-        //Se recorre el resultado de la consulta - rs
+        // Se recorre el resultado de la consulta - rs
         while (rs.next()) {
 
             Usuario u = new Usuario();
             u.setId_usuario(rs.getInt("id_usuario"));
             u.setNombre_usuario(rs.getString("nombre_usuario"));
             u.setContrasenia(rs.getString("contrasenia"));
-            u.setRol(rs.getString("rol"));
-            u.setToken(rs.getString("token"));
+            u.setRol(rs.getString("rol_usuario"));
+            // u.setToken(rs.getString("token")); // No se usa token en la vista
 
+            // Imprimir nombre de usuario para depuración
             System.out.println(rs.getString("nombre_usuario"));
-            
+
             Persona p = new Persona();
-            p.setId_persona(rs.getInt("idPersona"));
-            p.setNombre(rs.getString("nombre"));
+            p.setId_persona(rs.getInt("id_persona"));
+            p.setNombre(rs.getString("nombre_persona"));
             p.setApellido_paterno(rs.getString("a_paterno"));
             p.setApellido_materno(rs.getString("a_materno"));
             p.setFecha_nacimiento(rs.getString("fecha_nacimiento"));
             p.setGenero(rs.getString("genero"));
             p.setCurp(rs.getString("curp"));
-            p.setRfc(rs.getString("rfc"));
+            p.setRfc(rs.getString("rfc_persona"));
             p.setDomicilio(rs.getString("domicilio"));
-            p.setCodigo_postal(rs.getString("codigo_postal"));
-            p.setCiudad(rs.getString("ciudad"));
-            p.setEstado(rs.getString("estado"));
-            p.setTelefono(rs.getString("telefono"));
+            p.setCodigo_postal(rs.getString("codigo_postal_persona"));
+            p.setCiudad(rs.getString("ciudad_persona"));
+            p.setEstado(rs.getString("estado_persona"));
+            p.setTelefono(rs.getString("telefono_persona"));
             p.setFoto(rs.getString("foto"));
-            p.setNumero_licencia(rs.getString("numero_licencia"));
-            p.setTipo_licencia(rs.getString("tipo_licencia"));
+            p.setNumero_licencia(rs.getString("numero_licencia")); // Agregar si se usa este campo
+            p.setTipo_licencia(rs.getString("tipo_licencia"));     // Agregar si se usa este campo
 
             Empleado e = new Empleado();
             e.setId_empleado(rs.getInt("id_empleado"));
-            e.setCodigo(rs.getString("codigo"));
+            e.setCodigo(rs.getString("codigo_empleado"));
             e.setFecha_ingreso(rs.getString("fecha_ingreso"));
             e.setPuesto(rs.getString("puesto"));
             e.setCorreo_electronico(rs.getString("correo_electronico"));
@@ -80,6 +81,12 @@ public class ControllerEmpleado {
             e.setComentario(rs.getString("comentario"));
             e.setNombre_expediente(rs.getString("nombre_expediente"));
             e.setExpediente(rs.getBytes("expediente"));
+            e.setNombre_nomina(rs.getString("nombre_nomina"));     // Nuevo campo
+            e.setPdf_nomina(rs.getBytes("pdf_nomina"));            // Nuevo campo
+            e.setNombre_alta(rs.getString("nombre_alta"));         // Nuevo campo
+            e.setPdf_alta(rs.getBytes("pdf_alta"));                // Nuevo campo
+            e.setNombre_vacaciones(rs.getString("nombre_formato"));   // Nuevo campo
+            e.setPdf_vacaciones(rs.getBytes("pdf_formato"));          // Nuevo campo
             e.setTipo_vehiculo(rs.getString("tipo_vehiculo"));
             e.setNum_placa(rs.getString("num_placa"));
             e.setPersona(p);
@@ -91,60 +98,74 @@ public class ControllerEmpleado {
         pstmt.close();
         conn.close();
         connMySQL.close();
-        
+
         return empleados;
     }
-    
-    public List<Empleado> getAllInactivos() throws ClassNotFoundException, SQLException, IOException {
-        //Generar la consulta
+
+    public List<Empleado> getAllInctivos() throws ClassNotFoundException, SQLException, IOException {
+        // Generar la consulta
         String query = "SELECT * FROM vista_empleados WHERE estatus = 0";
 
-        //Conectarse a la BD
+        // Conectarse a la BD
         ConexionMySQL connMySQL = new ConexionMySQL();
 
-        //Abrir la conexion
+        // Abrir la conexion
         Connection conn = connMySQL.open();
-        //Crear el objeto que lleva la sentencia a la BD
+        // Crear el objeto que lleva la sentencia a la BD
         PreparedStatement pstmt = conn.prepareStatement(query);
-        //Se ejecuta la sentencia y se recibe el resultado
+        // Se ejecuta la sentencia y se recibe el resultado
         ResultSet rs = pstmt.executeQuery();
 
         List<Empleado> empleados = new ArrayList<>();
-        //Se recorre el resultado de la consulta - rs
+        // Se recorre el resultado de la consulta - rs
         while (rs.next()) {
 
             Usuario u = new Usuario();
             u.setId_usuario(rs.getInt("id_usuario"));
             u.setNombre_usuario(rs.getString("nombre_usuario"));
             u.setContrasenia(rs.getString("contrasenia"));
-            u.setRol(rs.getString("rol"));
-            u.setToken(rs.getString("token"));
+            u.setRol(rs.getString("rol_usuario"));
+            // u.setToken(rs.getString("token")); // No se usa token en la vista
+
+            // Imprimir nombre de usuario para depuración
+            System.out.println(rs.getString("nombre_usuario"));
 
             Persona p = new Persona();
-            p.setId_persona(rs.getInt("idPersona"));
-            p.setNombre(rs.getString("nombre"));
+            p.setId_persona(rs.getInt("id_persona"));
+            p.setNombre(rs.getString("nombre_persona"));
             p.setApellido_paterno(rs.getString("a_paterno"));
             p.setApellido_materno(rs.getString("a_materno"));
             p.setFecha_nacimiento(rs.getString("fecha_nacimiento"));
             p.setGenero(rs.getString("genero"));
             p.setCurp(rs.getString("curp"));
-            p.setRfc(rs.getString("rfc"));
+            p.setRfc(rs.getString("rfc_persona"));
             p.setDomicilio(rs.getString("domicilio"));
-            p.setCodigo_postal(rs.getString("codigo_postal"));
-            p.setCiudad(rs.getString("ciudad"));
-            p.setEstado(rs.getString("estado"));
-            p.setTelefono(rs.getString("telefono"));
+            p.setCodigo_postal(rs.getString("codigo_postal_persona"));
+            p.setCiudad(rs.getString("ciudad_persona"));
+            p.setEstado(rs.getString("estado_persona"));
+            p.setTelefono(rs.getString("telefono_persona"));
             p.setFoto(rs.getString("foto"));
-            p.setNumero_licencia(rs.getString("numero_licencia"));
-            p.setTipo_licencia(rs.getString("tipo_licencia"));
+            p.setNumero_licencia(rs.getString("numero_licencia")); // Agregar si se usa este campo
+            p.setTipo_licencia(rs.getString("tipo_licencia"));     // Agregar si se usa este campo
 
             Empleado e = new Empleado();
             e.setId_empleado(rs.getInt("id_empleado"));
-            e.setCodigo(rs.getString("codigo"));
+            e.setCodigo(rs.getString("codigo_empleado"));
             e.setFecha_ingreso(rs.getString("fecha_ingreso"));
             e.setPuesto(rs.getString("puesto"));
             e.setCorreo_electronico(rs.getString("correo_electronico"));
             e.setEstatus(rs.getInt("estatus"));
+            e.setComentario(rs.getString("comentario"));
+            e.setNombre_expediente(rs.getString("nombre_expediente"));
+            e.setExpediente(rs.getBytes("expediente"));
+            e.setNombre_nomina(rs.getString("nombre_nomina"));     // Nuevo campo
+            e.setPdf_nomina(rs.getBytes("pdf_nomina"));            // Nuevo campo
+            e.setNombre_alta(rs.getString("nombre_alta"));         // Nuevo campo
+            e.setPdf_alta(rs.getBytes("pdf_alta"));                // Nuevo campo
+            e.setNombre_vacaciones(rs.getString("nombre_formato"));   // Nuevo campo
+            e.setPdf_vacaciones(rs.getBytes("pdf_formato"));          // Nuevo campo
+            e.setTipo_vehiculo(rs.getString("tipo_vehiculo"));
+            e.setNum_placa(rs.getString("num_placa"));
             e.setPersona(p);
             e.setUsuario(u);
 
@@ -154,20 +175,24 @@ public class ControllerEmpleado {
         pstmt.close();
         conn.close();
         connMySQL.close();
-        
+
         return empleados;
     }
-    
+
     public int insert(Empleado e) throws ClassNotFoundException, SQLException, IOException {
-        //1. Generar la sentencia SQL
-        String query = "{call insertarEmpleado(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
-        //2. Crear la conexión a la BD
+        // 1. Generar la sentencia SQL
+        String query = "{call insertarEmpleado(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
+
+        // 2. Crear la conexión a la BD
         ConexionMySQL conMySQL = new ConexionMySQL();
-        //3. Se abre la conexión
+
+        // 3. Se abre la conexión
         Connection conn = conMySQL.open();
-        //4. Crear el statement que llevara la consulta
+
+        // 4. Crear el statement que llevará la consulta
         CallableStatement cstm = conn.prepareCall(query);
-        //5. LLenar todos los parametros de la llamada al Procedure
+
+        // 5. Llenar todos los parámetros de la llamada al Procedure
         cstm.setString(1, e.getPersona().getNombre());
         cstm.setString(2, e.getPersona().getApellido_paterno());
         cstm.setString(3, e.getPersona().getApellido_materno());
@@ -183,45 +208,56 @@ public class ControllerEmpleado {
         cstm.setString(13, e.getPersona().getFoto());
         cstm.setString(14, e.getPersona().getNumero_licencia());
         cstm.setString(15, e.getPersona().getTipo_licencia());
-        
+
         cstm.setString(16, e.getUsuario().getNombre_usuario());
         cstm.setString(17, e.getUsuario().getContrasenia());
         cstm.setString(18, e.getUsuario().getRol());
-        
+
         cstm.setString(19, e.getPuesto());
         cstm.setString(20, e.getCorreo_electronico());
         cstm.setInt(21, e.getEstatus());
         cstm.setString(22, e.getComentario());
         cstm.setString(23, e.getNombre_expediente());
         cstm.setBytes(24, e.getExpediente());
-        cstm.setString(25, e.getTipo_vehiculo());
-        cstm.setString(26, e.getNum_placa());
-        
-        cstm.registerOutParameter(27, Types.INTEGER);
-        cstm.registerOutParameter(28, Types.INTEGER);
-        cstm.registerOutParameter(29, Types.INTEGER);
-        cstm.registerOutParameter(30, Types.VARCHAR);
 
-        //6.Ejecutar la sentencia
+        // Agregar los nuevos parámetros
+        cstm.setString(25, e.getNombre_nomina());
+        cstm.setBytes(26, e.getPdf_nomina());
+        cstm.setString(27, e.getNombre_alta());
+        cstm.setBytes(28, e.getPdf_alta());
+        cstm.setString(29, e.getNombre_formato());
+        cstm.setBytes(30, e.getPdf_formato());
+
+        cstm.setString(31, e.getTipo_vehiculo());
+        cstm.setString(32, e.getNum_placa());
+
+        // Registrar los parámetros de salida
+        cstm.registerOutParameter(33, Types.INTEGER); // idPersona
+        cstm.registerOutParameter(34, Types.INTEGER); // idUsuario
+        cstm.registerOutParameter(35, Types.INTEGER); // idEmpleado
+        cstm.registerOutParameter(36, Types.VARCHAR); // codigoEmpleado
+
+        // 6. Ejecutar la sentencia
         cstm.execute();
-        //7. Obtener todos los parametros de retorno
-        e.getPersona().setId_persona(cstm.getInt(27));
-        e.getUsuario().setId_usuario(cstm.getInt(28));
-        e.setId_empleado(cstm.getInt(29));
-        e.setCodigo(cstm.getString(30));
-        
-        //8. Cerrar los objetos
+
+        // 7. Obtener todos los parámetros de retorno
+        e.getPersona().setId_persona(cstm.getInt(33));
+        e.getUsuario().setId_usuario(cstm.getInt(34));
+        e.setId_empleado(cstm.getInt(35));
+        e.setCodigo(cstm.getString(36));
+
+        // 8. Cerrar los objetos
         cstm.close();
         conn.close();
         conMySQL.close();
 
         return e.getId_empleado();
     }
-    
+
     public void delete(Empleado e) throws ClassNotFoundException {
         try {
             //1. Generar la consulta
-            String query = "UPDATE empleado SET estatus=0 WHERE id_empleado=" + e.getId_empleado()+ ";";
+            String query = "UPDATE empleado SET estatus=0 WHERE id_empleado=" + e.getId_empleado() + ";";
             //2.Generar la conexion con el gestor
             ConexionMySQL objConnMySQL = new ConexionMySQL();
             //3.Abrir la conexion
@@ -251,18 +287,22 @@ public class ControllerEmpleado {
             ex.printStackTrace();
         }
     }
-    
+
     public int modificar(Empleado e) throws ClassNotFoundException, SQLException, IOException {
-        //1. Generar la sentencia SQL
-        String query = "{call modificarEmpleado(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
-        //2. Crear la conexión a la BD
+        // 1. Generar la sentencia SQL
+        String query = "{call modificarEmpleado(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
+
+        // 2. Crear la conexión a la BD
         ConexionMySQL conMySQL = new ConexionMySQL();
-        //3. Se abre la conexión
+
+        // 3. Se abre la conexión
         Connection conn = conMySQL.open();
-        //4. Crear el statement que llevara la consulta
+
+        // 4. Crear el statement que llevará la consulta
         CallableStatement cstm = conn.prepareCall(query);
-        //5. LLenar todos los parametros de la llamada al Procedure
-        e.setId_empleado(cstm.getInt(1));
+
+        // 5. Llenar todos los parámetros de la llamada al Procedure
+        cstm.setInt(1, e.getId_empleado());
         cstm.setString(2, e.getPersona().getNombre());
         cstm.setString(3, e.getPersona().getApellido_paterno());
         cstm.setString(4, e.getPersona().getApellido_materno());
@@ -278,34 +318,43 @@ public class ControllerEmpleado {
         cstm.setString(14, e.getPersona().getFoto());
         cstm.setString(15, e.getPersona().getNumero_licencia());
         cstm.setString(16, e.getPersona().getTipo_licencia());
-        
+
         cstm.setString(17, e.getUsuario().getNombre_usuario());
         cstm.setString(18, e.getUsuario().getContrasenia());
         cstm.setString(19, e.getUsuario().getRol());
-        
+
         cstm.setString(20, e.getPuesto());
         cstm.setString(21, e.getCorreo_electronico());
         cstm.setInt(22, e.getEstatus());
         cstm.setString(23, e.getComentario());
         cstm.setString(24, e.getNombre_expediente());
         cstm.setBytes(25, e.getExpediente());
-        cstm.setString(26, e.getTipo_vehiculo());
-        cstm.setString(27, e.getNum_placa());
-        
-        //6.Ejecutar la sentencia
+
+        // Agregar los nuevos parámetros para los archivos PDF adicionales
+        cstm.setString(26, e.getNombre_nomina());
+        cstm.setBytes(27, e.getPdf_nomina());
+        cstm.setString(28, e.getNombre_alta());
+        cstm.setBytes(29, e.getPdf_alta());
+        cstm.setString(30, e.getNombre_vacaciones());
+        cstm.setBytes(31, e.getPdf_vacaciones());
+
+        cstm.setString(32, e.getTipo_vehiculo());
+        cstm.setString(33, e.getNum_placa());
+
+        // 6. Ejecutar la sentencia
         cstm.execute();
-        
-        //8. Cerrar los objetos
+
+        // 7. Cerrar los objetos
         cstm.close();
         conn.close();
         conMySQL.close();
 
         return e.getId_empleado();
     }
-    
+
     public static void main(String[] args) {
         try {
-            
+
             Persona persona = new Persona();
             persona.setNombre("Juan");
             persona.setApellido_paterno("Pérez");
@@ -323,13 +372,11 @@ public class ControllerEmpleado {
             persona.setNumero_licencia("L1234567890");
             persona.setTipo_licencia("A");
 
-            
             Usuario usuario = new Usuario();
             usuario.setNombre_usuario("juanp");
             usuario.setContrasenia("password123");
             usuario.setRol("empleado");
 
-            
             Empleado empleado = new Empleado();
             empleado.setCodigo("EMP001");
             empleado.setFecha_ingreso("2024-07-23");
@@ -344,7 +391,6 @@ public class ControllerEmpleado {
             empleado.setPersona(persona);
             empleado.setUsuario(usuario);
 
-            
             ControllerEmpleado emp = new ControllerEmpleado();
             int idEmpleado = emp.insert(empleado);
 
