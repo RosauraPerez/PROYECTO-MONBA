@@ -1,34 +1,63 @@
 import * as API from "./API/api_functions.js";
+import { getInputValues } from "./InputsHandler/inputs.js";
 import * as msg from "./SweetComponents/messages.js";
 
-let empleados;
+const btnAgregar = document.querySelector('#btnGuardar').addEventListener('click', () => agregarEmpleado())
 
 async function cargarCatEmpleado() {
-    const url = "http://localhost:8080/MONBA-PAGINA/api/empleado/getAll?";
+    const url = "http://localhost:8080/PROYECTO-MONBA/api/empleado/getAll?estatus=true";
 
-    const data = API.getData(url)
+    const data = await API.getData(url)
 
-    // fetch(url)
-    //     .then(response => response.json())
-    //     .then(response => {
-    //         let mostrar = "";
-    //         empleados = response;
-    //         for (let i = 0; i < empleadosActivos.length; i++) {
-    //             let empleado = empleadosActivos[i];
-    //             mostrar += "<tr>";
-    //             mostrar += "<td>" + empleado.persona.nombre + "</td>";
-    //             mostrar += "<td>" + empleado.persona.apellidoPaterno + "</td>";
-    //             mostrar += "<td>" + empleado.persona.apellidoMaterno + "</td>";
-    //             mostrar += "<td>" + empleado.puesto + "</td>";
-    //             mostrar += "<td class='acciones'>";
-    //             mostrar += "<button class='btn btn-warning btn-md font-weight-bold font-italic' data-toggle='modal' data-target='#myModalEx' onclick='modificarEmpleado(" + i + ");'> <i class='bi bi-pencil-square fa-lg'></i> Modificar </button>";
-    //             mostrar += "<button class='btn btn-danger btn-md font-weight-bold font-italic' onclick='eliminarEmpleado(" + i + ");'> <i class='bi bi-trash3-fill fa-lg'></i> Eliminar </button>";
-    //             mostrar += "</td>";
-    //             mostrar += "</tr>";
-    //         }
-    //         document.getElementById("tblEmpleados").innerHTML = mostrar;
-    //     })
-    //     .catch(error => console.error('Error al obtener los datos:', error));
+    crearTablaEmpleados(data)
+}
+
+async function agregarEmpleado() {
+    const datosFormulario = await getInputValues(getAllInputs())
+
+    console.log(datosFormulario)
+}
+
+function crearTablaEmpleados(dataEmpleados) {
+    const tableBody = document.querySelector('.id_empleado')
+
+    dataEmpleados.forEach(empleado => {
+        let botonModificarContenedor = document.createElement('th')
+        let botonModificar = document.createElement('button')
+        botonModificar.classList.add('btn', 'btn-waning', 'btn-md', 'font-weigth-bold', 'font-italic')
+        botonModificar.innerHTML = "<i class='bi bi-pencil-square fa-lg'></i> Modificar"
+        botonModificarContenedor.appendChild(botonModificar)
+
+        let botonEliminarContenedor = document.createElement('th')
+        let botonEliminar = document.createElement('button')
+        botonEliminar.classList.add('btn', 'btn-danger', 'btn-md', 'font-weight-bold')
+        botonEliminar.innerHTML = "<i class='bi bi-trash3-fill fa-lg'></i> Eliminar"
+        botonEliminarContenedor.appendChild(botonEliminar)
+
+        let row = document.createElement('tr') // Contenedor de los elementos o fila
+        
+        let empleadoNombre = document.createElement('th')
+        let empleadoApellidoPaterno = document.createElement('th')
+        let empleadoApellidoMaterno = document.createElement('th')
+        let empleadoPuesto = document.createElement('th')
+
+        empleadoNombre.textContent = empleado.Persona.nombre
+
+        empleadoApellidoPaterno.textContent = empleado.Persona.apellido_paterno
+
+        empleadoApellidoMaterno.textContent = empleado.Persona.apellido_materno
+
+        empleadoPuesto.textContent = empleado.puesto
+
+        row.appendChild(empleadoNombre)
+        row.appendChild(empleadoApellidoPaterno)
+        row.appendChild(empleadoApellidoMaterno)
+        row.appendChild(empleadoPuesto)
+        row.appendChild(botonModificarContenedor)
+        row.appendChild(botonEliminarContenedor)
+
+        tableBody.appendChild(row)
+    })
 }
 
 cargarCatEmpleado()
@@ -49,7 +78,7 @@ function getAllInputs() {
         {ID: '#telefono', KEY: 'Telefono'},
         {ID: '#numero_licencia', KEY: 'Numero de licencia'},
         {ID: '#tipo_licencia', KEY: 'Tipo de licencia'},
-        {ID: '#textoFoto', KEY: 'Foto'},
+        {ID: '#inputFoto', KEY: 'Foto', TYPE: 'img'},
         {ID: '#usuario', KEY: 'Usuario'},
         {ID: '#contrasenia', KEY: 'Contraseña'},
         {ID: '#rol', KEY: 'Rol'},
@@ -62,14 +91,15 @@ function getAllInputs() {
         {ID: '#tipo_vehiculo', KEY: 'Tipo de vehiculo'},
         {ID: '#num_placa', KEY: 'Numero de placa'},
         {ID: '#nombre_expediente', KEY: 'Nombre de expediente'},
-        {ID: '#expediente', KEY: 'Expediente'},
+        {ID: '#expediente', KEY: 'Expediente', TYPE: 'pdf'},
         {ID: '#nombre_archivo_imss', KEY: 'Nombre de archivo IMSS'},
-        {ID: '#alta_imss_empleado', KEY: 'Alta del IMSS'},
+        {ID: '#alta_imss_empleado', KEY: 'Alta del IMSS', TYPE: 'pdf'},
         {ID: '#nombre_archivo_nomina', KEY: 'Nombre de archivo nomina'},
-        {ID: '#nomina', KEY: 'Nomina'},
+        {ID: '#nomina', KEY: 'Nomina', TYPE: 'pdf'},
         {ID: '#nombre_vacaciones', KEY: 'Nombre del archivo vacaciones'},
-        {ID: '#formato_vacaciones', KEY: 'Formato vacaciones'}
+        {ID: '#formato_vacaciones', KEY: 'Formato vacaciones', TYPE: 'pdf'}
     ]
+    return inputs
 }
 
 // function obtenerDatosEmpleado() {
