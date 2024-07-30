@@ -2,29 +2,38 @@ import * as API from "./API/api_functions.js";
 import { getInputValues } from "./InputsHandler/inputs.js";
 import * as msg from "./SweetComponents/messages.js";
 
+/// Obtenemos el boton "Guardar" y le agrgamos el evento click
 const btnAgregar = document.querySelector('#btnGuardar').addEventListener('click', () => agregarEmpleado())
 
+
+/// Obtiene toda la informacion de los empleados
 async function cargarCatEmpleado() {
     const url = "http://localhost:8080/PROYECTO-MONBA/api/empleado/getAll?estatus=true";
 
     const data = await API.getData(url)
 
-    crearTablaEmpleados(data)
+    crearTablaEmpleados(data)   // Crea la tabla a partir de la informacion obtenida de la API
 }
 
+
+/// Agrega el empleado
 async function agregarEmpleado() {
-    const datosFormulario = await getInputValues(getAllInputs())
+    const URL = "http://localhost:8080/PROYECTO-MONBA/api/empleado/insert"
+    const datosFormulario = await getInputValues(getAllInputs()) // Obtiene los datos de los inputs
 
-    console.log(datosFormulario)
+    const newJson = CrearJsonEmpleado(datosFormulario) // Crea el Json para guardar el empelado con la informacion de los inputs
+
+    let response = await API.sendData(URL, "e", newJson) // Enviar los datos a la API
 }
 
+/// Crea los elementos de la tabla o tr > th
 function crearTablaEmpleados(dataEmpleados) {
     const tableBody = document.querySelector('.id_empleado')
 
     dataEmpleados.forEach(empleado => {
         let botonModificarContenedor = document.createElement('th')
         let botonModificar = document.createElement('button')
-        botonModificar.classList.add('btn', 'btn-waning', 'btn-md', 'font-weigth-bold', 'font-italic')
+        botonModificar.classList.add('btn', 'btn-warning', 'btn-md', 'font-weigth-bold', 'font-italic')
         botonModificar.innerHTML = "<i class='bi bi-pencil-square fa-lg'></i> Modificar"
         botonModificarContenedor.appendChild(botonModificar)
 
@@ -35,7 +44,7 @@ function crearTablaEmpleados(dataEmpleados) {
         botonEliminarContenedor.appendChild(botonEliminar)
 
         let row = document.createElement('tr') // Contenedor de los elementos o fila
-        
+
         let empleadoNombre = document.createElement('th')
         let empleadoApellidoPaterno = document.createElement('th')
         let empleadoApellidoMaterno = document.createElement('th')
@@ -62,45 +71,98 @@ function crearTablaEmpleados(dataEmpleados) {
 
 cargarCatEmpleado()
 
+/// Funcion para devolver un objeto Json con los parametros de los inputs del formulario, compuesto por: ID del input, NOMBRE del atributo del Json, KEY para verificaciones futuras como alertas de
+// campos vacios
 function getAllInputs() {
     const inputs = [
-        {ID: '#nombre', KEY: 'Nombre'},
-        {ID: '#a_Paterno', KEY: 'Apellido Paterno'},
-        {ID: '#a_Materno', KEY: 'Apellido Materno'},
-        {ID: '#genero', KEY: 'Genero'},
-        {ID: '#fecha_nacimiento', KEY: 'Fecha de Nacimiento'},
-        {ID: '#rfc', KEY: 'RFC'},
-        {ID: '#curp', KEY: 'CURP'},
-        {ID: '#domicilio', KEY: 'Domicilio'},
-        {ID: '#cp', KEY: 'Codigo Postal'},
-        {ID: '#cuidad', KEY: 'Ciudad'},
-        {ID: '#estado', KEY: 'Estado'},
-        {ID: '#telefono', KEY: 'Telefono'},
-        {ID: '#numero_licencia', KEY: 'Numero de licencia'},
-        {ID: '#tipo_licencia', KEY: 'Tipo de licencia'},
-        {ID: '#inputFoto', KEY: 'Foto', TYPE: 'img'},
-        {ID: '#usuario', KEY: 'Usuario'},
-        {ID: '#contrasenia', KEY: 'Contraseña'},
-        {ID: '#rol', KEY: 'Rol'},
-        {ID: '#codigoEmpleado', KEY: 'Codigo del empleado'},
-        {ID: '#fechaIngreso', KEY: 'Fecha de Ingreso'},
-        {ID: '#puesto', KEY: 'Puesto'},
-        {ID: '#correo', KEY: 'Correo'},
-        {ID: '#Estatus', KEY: 'Estatus'},
-        {ID: '#comentario', KEY: 'Comentarios'},
-        {ID: '#tipo_vehiculo', KEY: 'Tipo de vehiculo'},
-        {ID: '#num_placa', KEY: 'Numero de placa'},
-        {ID: '#nombre_expediente', KEY: 'Nombre de expediente'},
-        {ID: '#expediente', KEY: 'Expediente', TYPE: 'pdf'},
-        {ID: '#nombre_archivo_imss', KEY: 'Nombre de archivo IMSS'},
-        {ID: '#alta_imss_empleado', KEY: 'Alta del IMSS', TYPE: 'pdf'},
-        {ID: '#nombre_archivo_nomina', KEY: 'Nombre de archivo nomina'},
-        {ID: '#nomina', KEY: 'Nomina', TYPE: 'pdf'},
-        {ID: '#nombre_vacaciones', KEY: 'Nombre del archivo vacaciones'},
-        {ID: '#formato_vacaciones', KEY: 'Formato vacaciones', TYPE: 'pdf'}
+        { ID: '#nombre', NAME: "nombre", KEY: 'Nombre' },
+        { ID: '#a_Paterno', NAME: "apellido_paterno", KEY: 'Apellido Paterno' },
+        { ID: '#a_Materno', NAME: "apellido_materno", KEY: 'Apellido Materno' },
+        { ID: '#genero', NAME: "genero", KEY: 'Genero' },
+        { ID: '#fecha_nacimiento', NAME: "fecha_nacimiento", KEY: 'Fecha de Nacimiento' },
+        { ID: '#rfc', NAME: "rfc", KEY: 'RFC' },
+        { ID: '#curp', NAME: "curp", KEY: 'CURP' },
+        { ID: '#domicilio', NAME: "domicilio", KEY: 'Domicilio' },
+        { ID: '#cp', NAME: "codigo_postal", KEY: 'Codigo Postal' },
+        { ID: '#ciudad', NAME: "ciudad", KEY: 'Ciudad' },
+        { ID: '#estado', NAME: "estado", KEY: 'Estado' },
+        { ID: '#telefono', NAME: "telefono", KEY: 'Telefono' },
+        { ID: '#numero_licencia', NAME: "numero_licencia", KEY: 'Numero de licencia' },
+        { ID: '#tipo_licencia', NAME: "tipo_licencia", KEY: 'Tipo de licencia' },
+
+        { ID: '#inputFoto', NAME: "foto", KEY: 'Foto', TYPE: 'img' },
+        { ID: '#usuario', NAME: "nombre_usuario", KEY: 'Usuario' },
+        { ID: '#contrasenia', NAME: "contrasenia", KEY: 'Contraseña' },
+        { ID: '#rol', NAME: "rol", KEY: 'Rol' },
+
+        { ID: '#codigoEmpleado', NAME: "codigo", KEY: 'Codigo del empleado' },
+        { ID: '#fechaIngreso', NAME: "fecha_ingreso", KEY: 'Fecha de Ingreso' },
+        { ID: '#puesto', NAME: "puesto", KEY: 'Puesto' },
+        { ID: '#correo', NAME: "correo_electronico", KEY: 'Correo' },
+        { ID: '#estatus', NAME: "estatus", KEY: 'Estatus' },
+        { ID: '#comentario', NAME: "comentario", KEY: 'Comentarios' },
+        { ID: '#tipo_vehiculo', NAME: "tipo_vehiculo", KEY: 'Tipo de vehiculo' },
+        { ID: '#num_placa', NAME: "num_placa", KEY: 'Numero de placa' },
+
+        { ID: '#nombre_expediente', NAME: "nombre_expediente", KEY: 'Nombre de expediente' },
+        { ID: '#expediente', NAME: "expediente", KEY: 'Expediente', TYPE: 'pdf' },
+        { ID: '#nombre_archivo_imss', NAME: "nombre_alta", KEY: 'Nombre de archivo IMSS' },
+        { ID: '#alta_imss_empleado', NAME: "pdf_alta", KEY: 'Alta del IMSS', TYPE: 'pdf' },
+        { ID: '#nombre_archivo_nomina', NAME: "nombre_nomina", KEY: 'Nombre de archivo nomina' },
+        { ID: '#nomina', NAME: "pdf_nomina", KEY: 'Nomina', TYPE: 'pdf' },
+        { ID: '#nombre_vacaciones', NAME: "nombre_vacaciones", KEY: 'Nombre del archivo vacaciones' },
+        { ID: '#formato_vacaciones', NAME: "pdf_vacaciones", KEY: 'Formato vacaciones', TYPE: 'pdf' }
     ]
     return inputs
 }
+
+
+/// Creamos el Json con los datos de los inputs
+function CrearJsonEmpleado(data) {
+    const empleado = {
+        "codigo": data.codigo || "",
+        "fecha_ingreso": data.fecha_ingreso || "",
+        "puesto": data.puesto || "",
+        "correo_electronico": data.correo_electronico || "",
+        "estatus": data.estatus || "",
+        "comentario": data.comentario || "",
+        "nombre_expediente": data.nombre_expediente || "",
+        "expediente": data.expediente || [],
+        "nombre_nomina": data.nombre_nomina || "",
+        "pdf_nomina": data.pdf_nomina || [],
+        "nombre_alta": data.nombre_alta || "",
+        "pdf_alta": data.pdf_alta || [],
+        "nombre_vacaciones": data.nombre_vacaciones || "",
+        "pdf_vacaciones": data.pdf_vacaciones || [],
+        "tipo_vehiculo": data.tipo_vehiculo || "",
+        "num_placa": data.num_placa || "",
+        "Persona": {
+            "nombre": data.nombre || "",
+            "apellido_paterno": data.apellido_paterno || "",
+            "apellido_materno": data.apellido_materno || "",
+            "genero": data.genero || "",
+            "fecha_nacimiento": data.fecha_nacimiento || "",
+            "rfc": data.rfc || "",
+            "curp": data.curp || "",
+            "domicilio": data.domicilio || "",
+            "codigo_postal": data.codigo_postal || "",
+            "ciudad": data.ciudad || "",
+            "estado": data.estado || "",
+            "telefono": data.telefono || "",
+            "foto": data.foto || "",
+            "numero_licencia": data.numero_licencia || "",
+            "tipo_licencia": data.tipo_licencia || ""
+        },
+        "Usuario": {
+            "nombre_usuario": data.nombre_usuario || "",
+            "contrasenia": data.contrasenia || "",
+            "rol": data.rol || ""
+        }
+    }
+    return empleado;
+}
+
+/// TERMINAR LAS DEMAS FUNCIONES
 
 // function obtenerDatosEmpleado() {
 //     // Datos de Persona

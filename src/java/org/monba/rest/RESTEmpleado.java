@@ -73,6 +73,12 @@ public class RESTEmpleado {
     @Produces(MediaType.APPLICATION_JSON)
     public Response insert(@FormParam("e") @DefaultValue("") String empleado) throws ClassNotFoundException, IOException {
         Gson objGson = new Gson();
+            
+        if (empleado.isEmpty()) {
+            System.out.println("Empleado vacio");
+        } else {
+            System.out.println("Empleado con datos");
+        }
         Empleado e = objGson.fromJson(empleado, Empleado.class);
 
         String out = "";

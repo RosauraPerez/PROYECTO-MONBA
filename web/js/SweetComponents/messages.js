@@ -1,3 +1,4 @@
+/// Mensaje de pregunta
 export function questionMessage(title, text) {
     Swal.fire({
         title: title,
@@ -6,6 +7,7 @@ export function questionMessage(title, text) {
     })
 }
 
+/// Mensaje de error
 export function errorMessage(title, text, footer = '') {
     Swal.fire({
         icon: "error",
@@ -15,6 +17,7 @@ export function errorMessage(title, text, footer = '') {
     })
 }
 
+/// Mensaje de exito o error
 export function successMessage(icon, title) {
     Swal.fire({
         position: "top-end",

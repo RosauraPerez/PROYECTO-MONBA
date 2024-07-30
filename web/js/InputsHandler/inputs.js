@@ -1,3 +1,4 @@
+/// Funcion para obtner los valores de los inputs a partir del Json y devolverlos en otro Json
 export async function getInputValues(inputs) {
     const result = {};
 
@@ -9,22 +10,25 @@ export async function getInputValues(inputs) {
                 if (element.files.length > 0) {
                     const fileReaded = element.files[0];
 
-                    result[input.KEY] = await convertToBase64(fileReaded);
+                    result[input.NAME] = await convertToBase64(fileReaded);
                 } else {
-                    result[input.KEY] = "NADA";
+                    result[input.NAME] = ""; // En caso de input vacio
                 }
             } else {
-                result[input.KEY] = element.value;
+                result[input.NAME] = element.value;
             }
         }
     }
     return result;
 }
 
+/// Convertir archivos a base64
 function convertToBase64(file) {
+    const MAX_FILE_SIZE = 5 // 5MB de peso maximo por archivo
+
     return new Promise((resolve, reject) => {
         if (file) {
-            if (getFileSize(file) <= 5) {
+            if (getFileSize(file) <= MAX_FILE_SIZE) {
                 const reader = new FileReader();
 
                 reader.onload = function (e) {
@@ -37,14 +41,15 @@ function convertToBase64(file) {
 
                 reader.readAsDataURL(file);
             } else {
-                reject('File size exceeds 5MB limit.');
+                reject('Tamaño de archivo mayor a 5MB.');
             }
         } else {
-            reject('No file provided.');
+            reject('Ningun archivo agregado.');
         }
     });
 }
 
+/// Obtener el peso del archivo
 function getFileSize(file) {
     let fileSizeInBytes = file.size
     let fileSizeInKB = (fileSizeInBytes / 1024).toFixed(2)

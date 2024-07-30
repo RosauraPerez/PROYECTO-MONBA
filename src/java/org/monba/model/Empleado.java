@@ -17,13 +17,13 @@ public class Empleado {
     private int estatus;
     private String comentario;
     private String nombre_expediente;
-    private byte[] expediente;
+    private String expediente;
     private String nombre_nomina;
-    private byte[] pdf_nomina;
+    private String pdf_nomina;
     private String nombre_alta;
-    private byte[] pdf_alta;
+    private String pdf_alta;
     private String nombre_vacaciones;
-    private byte[] pdf_vacaciones;
+    private String pdf_vacaciones;
     private String tipo_vehiculo;
     private String num_placa;
     private Persona Persona;
@@ -32,7 +32,7 @@ public class Empleado {
     public Empleado() {
     }
 
-    public Empleado(int id_empleado, String codigo, String fecha_ingreso, String puesto, String correo_electronico, int estatus, String comentario, String nombre_expediente, byte[] expediente, String nombre_nomina, byte[] pdf_nomina, String nombre_alta, byte[] pdf_alta, String nombre_vacaciones, byte[] pdf_vacaciones, String tipo_vehiculo, String num_placa, Persona Persona, Usuario Usuario) {
+    public Empleado(int id_empleado, String codigo, String fecha_ingreso, String puesto, String correo_electronico, int estatus, String comentario, String nombre_expediente, String expediente, String nombre_nomina, String pdf_nomina, String nombre_alta, String pdf_alta, String nombre_vacaciones, String pdf_vacaciones, String tipo_vehiculo, String num_placa, Persona Persona, Usuario Usuario) {
         this.id_empleado = id_empleado;
         this.codigo = codigo;
         this.fecha_ingreso = fecha_ingreso;
@@ -118,11 +118,11 @@ public class Empleado {
         this.nombre_expediente = nombre_expediente;
     }
 
-    public byte[] getExpediente() {
+    public String getExpediente() {
         return expediente;
     }
 
-    public void setExpediente(byte[] expediente) {
+    public void setExpediente(String expediente) {
         this.expediente = expediente;
     }
 
@@ -134,11 +134,11 @@ public class Empleado {
         this.nombre_nomina = nombre_nomina;
     }
 
-    public byte[] getPdf_nomina() {
+    public String getPdf_nomina() {
         return pdf_nomina;
     }
 
-    public void setPdf_nomina(byte[] pdf_nomina) {
+    public void setPdf_nomina(String pdf_nomina) {
         this.pdf_nomina = pdf_nomina;
     }
 
@@ -150,11 +150,11 @@ public class Empleado {
         this.nombre_alta = nombre_alta;
     }
 
-    public byte[] getPdf_alta() {
+    public String getPdf_alta() {
         return pdf_alta;
     }
 
-    public void setPdf_alta(byte[] pdf_alta) {
+    public void setPdf_alta(String pdf_alta) {
         this.pdf_alta = pdf_alta;
     }
 
@@ -166,11 +166,11 @@ public class Empleado {
         this.nombre_vacaciones = nombre_vacaciones;
     }
 
-    public byte[] getPdf_vacaciones() {
+    public String getPdf_vacaciones() {
         return pdf_vacaciones;
     }
 
-    public void setPdf_vacaciones(byte[] pdf_vacaciones) {
+    public void setPdf_vacaciones(String pdf_vacaciones) {
         this.pdf_vacaciones = pdf_vacaciones;
     }
 
@@ -206,6 +206,5 @@ public class Empleado {
         this.Usuario = Usuario;
     }
 
-    
     
 }

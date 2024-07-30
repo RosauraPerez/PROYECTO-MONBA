@@ -80,13 +80,13 @@ public class ControllerEmpleado {
             e.setEstatus(rs.getInt("estatus"));
             e.setComentario(rs.getString("comentario"));
             e.setNombre_expediente(rs.getString("nombre_expediente"));
-            e.setExpediente(rs.getBytes("expediente"));
+            e.setExpediente(rs.getString("expediente"));
             e.setNombre_nomina(rs.getString("nombre_nomina"));     // Nuevo campo
-            e.setPdf_nomina(rs.getBytes("pdf_nomina"));            // Nuevo campo
+            e.setPdf_nomina(rs.getString("pdf_nomina"));            // Nuevo campo
             e.setNombre_alta(rs.getString("nombre_alta"));         // Nuevo campo
-            e.setPdf_alta(rs.getBytes("pdf_alta"));                // Nuevo campo
+            e.setPdf_alta(rs.getString("pdf_alta"));                // Nuevo campo
             e.setNombre_vacaciones(rs.getString("nombre_formato"));   // Nuevo campo
-            e.setPdf_vacaciones(rs.getBytes("pdf_formato"));          // Nuevo campo
+            e.setPdf_vacaciones(rs.getString("pdf_formato"));          // Nuevo campo
             e.setTipo_vehiculo(rs.getString("tipo_vehiculo"));
             e.setNum_placa(rs.getString("num_placa"));
             e.setPersona(p);
@@ -157,13 +157,13 @@ public class ControllerEmpleado {
             e.setEstatus(rs.getInt("estatus"));
             e.setComentario(rs.getString("comentario"));
             e.setNombre_expediente(rs.getString("nombre_expediente"));
-            e.setExpediente(rs.getBytes("expediente"));
+            e.setExpediente(rs.getString("expediente"));
             e.setNombre_nomina(rs.getString("nombre_nomina"));     // Nuevo campo
-            e.setPdf_nomina(rs.getBytes("pdf_nomina"));            // Nuevo campo
+            e.setPdf_nomina(rs.getString("pdf_nomina"));            // Nuevo campo
             e.setNombre_alta(rs.getString("nombre_alta"));         // Nuevo campo
-            e.setPdf_alta(rs.getBytes("pdf_alta"));                // Nuevo campo
+            e.setPdf_alta(rs.getString("pdf_alta"));                // Nuevo campo
             e.setNombre_vacaciones(rs.getString("nombre_formato"));   // Nuevo campo
-            e.setPdf_vacaciones(rs.getBytes("pdf_formato"));          // Nuevo campo
+            e.setPdf_vacaciones(rs.getString("pdf_formato"));          // Nuevo campo
             e.setTipo_vehiculo(rs.getString("tipo_vehiculo"));
             e.setNum_placa(rs.getString("num_placa"));
             e.setPersona(p);
@@ -181,7 +181,7 @@ public class ControllerEmpleado {
 
     public int insert(Empleado e) throws ClassNotFoundException, SQLException, IOException {
         // 1. Generar la sentencia SQL
-        String query = "{call insertarEmpleado(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
+        String query = "call insertarEmpleado(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
         // 2. Crear la conexión a la BD
         ConexionMySQL conMySQL = new ConexionMySQL();
@@ -218,15 +218,15 @@ public class ControllerEmpleado {
         cstm.setInt(21, e.getEstatus());
         cstm.setString(22, e.getComentario());
         cstm.setString(23, e.getNombre_expediente());
-        cstm.setBytes(24, e.getExpediente());
+        cstm.setString(24, e.getExpediente());
 
         // Agregar los nuevos parámetros
         cstm.setString(25, e.getNombre_nomina());
-        cstm.setBytes(26, e.getPdf_nomina());
+        cstm.setString(26, e.getPdf_nomina());
         cstm.setString(27, e.getNombre_alta());
-        cstm.setBytes(28, e.getPdf_alta());
+        cstm.setString(28, e.getPdf_alta());
         cstm.setString(29, e.getNombre_vacaciones());
-        cstm.setBytes(30, e.getPdf_vacaciones());
+        cstm.setString(30, e.getPdf_vacaciones());
 
         cstm.setString(31, e.getTipo_vehiculo());
         cstm.setString(32, e.getNum_placa());
@@ -328,15 +328,15 @@ public class ControllerEmpleado {
         cstm.setInt(22, e.getEstatus());
         cstm.setString(23, e.getComentario());
         cstm.setString(24, e.getNombre_expediente());
-        cstm.setBytes(25, e.getExpediente());
+        cstm.setString(25, e.getExpediente());
 
         // Agregar los nuevos parámetros para los archivos PDF adicionales
         cstm.setString(26, e.getNombre_nomina());
-        cstm.setBytes(27, e.getPdf_nomina());
+        cstm.setString(27, e.getPdf_nomina());
         cstm.setString(28, e.getNombre_alta());
-        cstm.setBytes(29, e.getPdf_alta());
+        cstm.setString(29, e.getPdf_alta());
         cstm.setString(30, e.getNombre_vacaciones());
-        cstm.setBytes(31, e.getPdf_vacaciones());
+        cstm.setString(31, e.getPdf_vacaciones());
 
         cstm.setString(32, e.getTipo_vehiculo());
         cstm.setString(33, e.getNum_placa());
@@ -385,7 +385,7 @@ public class ControllerEmpleado {
             empleado.setEstatus(1);
             empleado.setComentario("Empleado de prueba");
             empleado.setNombre_expediente("expediente.pdf");
-            empleado.setExpediente(new byte[]{}); // Aquí podrías añadir un archivo en binario
+            empleado.setExpediente("Expediente"); // Aquí podrías añadir un archivo en binario
             empleado.setTipo_vehiculo("Camión");
             empleado.setNum_placa("ABC123");
             empleado.setPersona(persona);
