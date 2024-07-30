@@ -18,7 +18,7 @@ export function errorMessage(title, text, footer = '') {
 }
 
 /// Mensaje de exito o error
-export function successMessage(icon, title) {
+export function successMessage(icon = 'success', title) {
     Swal.fire({
         position: "top-end",
         icon: icon,
