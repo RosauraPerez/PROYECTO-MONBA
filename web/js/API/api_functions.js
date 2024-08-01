@@ -24,9 +24,9 @@ export async function sendData(url, param, object) {
 
     try {
         const response = await fetch(url, requestOptions)
-
+        
         const jsonResponse = await response.json()
-
+        
         return jsonResponse
     } catch (error) {
         alert("Error al guardar los datos, intentelo nuevamente")
