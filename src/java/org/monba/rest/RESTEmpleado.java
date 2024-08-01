@@ -26,14 +26,14 @@ import org.monba.model.Empleado;
  */
 @Path("empleado")
 public class RESTEmpleado {
-    
+
     @Path("getAll")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAll(@QueryParam("estatus") @DefaultValue("true") boolean estatus) {
         String out = "";
         try {
-            ControllerEmpleado  objCE = new ControllerEmpleado();
+            ControllerEmpleado objCE = new ControllerEmpleado();
             List<Empleado> listaEmpleados = objCE.getAllActivos();
             Gson objGson = new Gson();
             out = objGson.toJson(listaEmpleados);
@@ -43,16 +43,31 @@ public class RESTEmpleado {
         }
         return Response.ok(out).build();
     }
-    
+
     @Path("delete")
-    @GET
+    @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public Response delete(@QueryParam("id_empleado") @DefaultValue("0") String id_empleado) throws ClassNotFoundException {
-        Empleado e = new Empleado();
-        e.setId_empleado(Integer.parseInt(id_empleado));
-        ControllerEmpleado objCE = new ControllerEmpleado();
-        objCE.delete(e);
-        String out = "{\"response\":\"OK\"}";
+    public Response delete(@FormParam("id") @DefaultValue("") Integer empleado) {
+        String out = "";
+        
+        try {
+            Empleado e = new Empleado();
+            e.setId_empleado(empleado);
+            
+            ControllerEmpleado ce = new ControllerEmpleado();
+            
+            ce.delete(e);
+            
+            out = """
+                  {"response" : "OK"}
+                  """;
+        } catch (Exception e) {
+            e.printStackTrace();
+            out = """
+                  {"response" : "ERROR"}
+                  """;
+        }
+        
         return Response.ok(out).build();
     }
 
@@ -67,18 +82,13 @@ public class RESTEmpleado {
         String out = "{\"response\":\"OK\"}";
         return Response.ok(out).build();
     }
-    
+
     @Path("insert")
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     public Response insert(@FormParam("e") @DefaultValue("") String empleado) throws ClassNotFoundException, IOException {
         Gson objGson = new Gson();
-            
-        if (empleado.isEmpty()) {
-            System.out.println("Empleado vacio");
-        } else {
-            System.out.println("Empleado con datos");
-        }
+
         Empleado e = objGson.fromJson(empleado, Empleado.class);
 
         String out = "";
@@ -86,10 +96,15 @@ public class RESTEmpleado {
         ControllerEmpleado objCE = new ControllerEmpleado();
         try {
             int idEmpleadoGenerado = objCE.insert(e);
-            out = "{\"result\":\"Empleado insertado exitosamente\"}";
+            out = """
+                  {"response" : "OK"}
+                  """;
             out = String.format(out, idEmpleadoGenerado);
         } catch (SQLException ex) {
-            out = "{\"result\":\"Error al insertar el empleado: " + ex.getMessage() + "\"}";
+            ex.printStackTrace();
+            out = """
+                  {"response" : "ERROR"}
+                  """;
         }
         return Response.ok(out).build();
     }

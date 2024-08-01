@@ -29,6 +29,6 @@ export async function sendData(url, param, object) {
 
         return jsonResponse
     } catch (error) {
-        alert("Error al guardar los datos, intentelo nuevamente")
+        msg.successMessage('error', "Error al enviar los datos")
     }
 }

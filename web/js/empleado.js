@@ -2,19 +2,48 @@ import * as API from "./API/api_functions.js";
 import { getInputValues } from "./InputsHandler/inputs.js";
 import * as msg from "./SweetComponents/messages.js";
 
-/// Obtenemos el boton "Guardar" y le agrgamos el evento click
-const btnAgregar = document.querySelector('#btnGuardar').addEventListener('click', () => agregarEmpleado())
+startModule()
 
+async function startModule() {
+    const data = await getAllData()
 
-/// Obtiene toda la informacion de los empleados
-async function cargarCatEmpleado() {
-    const url = "http://localhost:8080/PROYECTO-MONBA/api/empleado/getAll?estatus=true";
-
-    const data = await API.getData(url)
-
-    crearTablaEmpleados(data)   // Crea la tabla a partir de la informacion obtenida de la API
+    cargarCatEmpleado(data)
+    loadControlEvents(data)
 }
 
+async function getAllData() {
+    const URL = "http://localhost:8080/PROYECTO-MONBA/api/empleado/getAll?estatus=true";
+
+    let data = await API.getData(URL)
+
+    return data
+}
+
+function loadControlEvents(data) {
+    /// Obtenemos el boton "Guardar" y le agrgamos el evento click
+    const btnAgregar = document.querySelector('#btnGuardar').addEventListener('click', () => agregarEmpleado())
+
+    const inputBusqueda = document.querySelector('#inputBusqueda');
+
+    inputBusqueda.addEventListener('input', () => filterEmployees(inputBusqueda.value, data))
+}
+
+function filterEmployees(name, data) {
+    const employees = data
+
+    const resultado = employees.filter(employees => employees.Persona.nombre.toLowerCase().includes(name.toLowerCase()));
+
+    if (name == '') {
+        cargarCatEmpleado(data)
+    }
+
+    cargarCatEmpleado(resultado)
+}
+
+/// Obtiene toda la informacion de los empleados
+async function cargarCatEmpleado(data) {
+    crearTablaEmpleados(data)   // Crea la tabla a partir de la informacion obtenida de la API
+}
 
 /// Agrega el empleado
 async function agregarEmpleado() {
@@ -24,11 +53,19 @@ async function agregarEmpleado() {
     const newJson = CrearJsonEmpleado(datosFormulario) // Crea el Json para guardar el empelado con la informacion de los inputs
 
     let response = await API.sendData(URL, "e", newJson) // Enviar los datos a la API
+
+    if (response.response === 'OK') {
+        msg.successMessage('success', 'Empleado Agregado')
+    } else {
+        msg.successMessage('error', 'Error al agregar al empleado')
+    }
 }
 
 /// Crea los elementos de la tabla o tr > th
 function crearTablaEmpleados(dataEmpleados) {
     const tableBody = document.querySelector('.id_empleado')
+
+    tableBody.innerHTML = ''
 
     dataEmpleados.forEach(empleado => {
         let botonModificarContenedor = document.createElement('th')
@@ -65,11 +102,27 @@ function crearTablaEmpleados(dataEmpleados) {
         row.appendChild(botonModificarContenedor)
         row.appendChild(botonEliminarContenedor)
 
+        //botonEliminar.removeEventListener('click', () => borrarEmpleado(empleado.id_empleado))
+        botonEliminar.addEventListener('click', () => borrarEmpleado(empleado.id_empleado))
+
         tableBody.appendChild(row)
     })
 }
 
-cargarCatEmpleado()
+async function borrarEmpleado(idEmpleado) {
+    console.log(idEmpleado)
+
+    const URL = `http://localhost:8080/PROYECTO-MONBA/api/empleado/delete`
+
+    const response = await API.sendData(URL, "id", idEmpleado)
+
+    if (response.response == 'OK') {
+        msg.successMessage('success', 'Empleado eliminado')
+        cargarCatEmpleado()
+    } else {
+        msg.errorMessage("Error al eliminar el empleado", "No se elimino el empleado", "Intentelo nuevamente")
+    }
+}
 
 /// Funcion para devolver un objeto Json con los parametros de los inputs del formulario, compuesto por: ID del input, NOMBRE del atributo del Json, KEY para verificaciones futuras como alertas de
 // campos vacios
