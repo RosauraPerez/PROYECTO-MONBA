@@ -36,7 +36,7 @@ public class RESTAcceso {
     public Response cerrarSesion(@FormParam("u") String usuario) throws ClassNotFoundException, SQLException {
         
             ConexionMySQL objConn = new ConexionMySQL();
-            Connection conn = objConn.abrirConexion();
+            Connection conn = objConn.open();
 
             String queryUpdate = "UPDATE usuario SET token = NULL WHERE nombre_usuario = ?";
             PreparedStatement pstmt = conn.prepareStatement(queryUpdate);
