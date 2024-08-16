@@ -21,7 +21,7 @@ public class ControllerEmpresa {
         // 1. Crear la sentencia SQL
         String query = "SELECT * FROM empresa WHERE estatus = 1 AND rol = ?";
         // 2. Se establece la conexión con la BD
-        Connection conn = connMySQL.abrirConexion();
+        Connection conn = connMySQL.open();
         // 3. Se genera el statement para enviar la consulta
         PreparedStatement pstmt = conn.prepareStatement(query);
         pstmt.setString(1, rol);
@@ -52,7 +52,7 @@ public class ControllerEmpresa {
         rs.close();
         pstmt.close();
         conn.close();
-        connMySQL.cerrarConexion(conn);
+        connMySQL.close();
 
         // 7. Devolver la información
         return listaEmpresas;
@@ -65,7 +65,7 @@ public class ControllerEmpresa {
         // 1. Crear la sentencia SQL
         String query = "SELECT * FROM empresa WHERE estatus = 0 AND rol = ?";
         // 2. Se establece la conexión con la BD
-        Connection conn = connMySQL.abrirConexion();
+        Connection conn = connMySQL.open();
         // 3. Se genera el statement para enviar la consulta
         PreparedStatement pstmt = conn.prepareStatement(query);
         pstmt.setString(1, rol);
@@ -96,7 +96,7 @@ public class ControllerEmpresa {
         rs.close();
         pstmt.close();
         conn.close();
-        connMySQL.cerrarConexion(conn);
+        connMySQL.close();
 
         // 7. Devolver la información
         return listaEmpresas;
@@ -108,7 +108,7 @@ public class ControllerEmpresa {
             //2.Generar la conexion con la BD
             ConexionMySQL connMysql = new ConexionMySQL();
             //abrir la conexion
-            Connection conn = connMysql.abrirConexion();
+            Connection conn = connMysql.open();
             //crear objeto que lleva la sentencia - Statement
             Statement stmt = conn.createStatement();
             //5.Ejecutar la query
@@ -124,7 +124,7 @@ public class ControllerEmpresa {
             //2.Generar la conexion con la BD
             ConexionMySQL connMysql = new ConexionMySQL();
             //abrir la conexion
-            Connection conn = connMysql.abrirConexion();
+            Connection conn = connMysql.open();
             //crear objeto que lleva la sentencia - Statement
             Statement stmt = conn.createStatement();
             //5.Ejecutar la query
@@ -138,7 +138,7 @@ public class ControllerEmpresa {
         String query = "{call InsertarEmpresa(?,?,?,?,?,?,?,?,?,?,?,?,?)}";
         ConexionMySQL connMysql = new ConexionMySQL();
         // se abre la conexion
-        Connection conn = connMysql.abrirConexion();
+        Connection conn = connMysql.open();
         // crear el steatment  que llevara la consulta
         CallableStatement cstm = (CallableStatement) conn.prepareCall(query);
         //llenar todos los parametros de la llamada al procedure
@@ -162,14 +162,14 @@ public class ControllerEmpresa {
         e.setId_empresa(cstm.getInt(13));
         cstm.close();
         conn.close();
-        connMysql.cerrarConexion(conn);
+        connMysql.close();
         return e.getId_empresa();
     }
     public int modificarEmpresa(Empresa e) throws SQLException, IOException, ClassNotFoundException{
         String query = "{call ModificarEmpresa(?,?,?,?,?,?,?,?,?,?,?,?,?)}";
         ConexionMySQL connMysql = new ConexionMySQL();
         // se abre la conexion
-        Connection conn = connMysql.abrirConexion();
+        Connection conn = connMysql.open();
         // crear el steatment  que llevara la consulta
         CallableStatement cstm =  (CallableStatement) conn.prepareCall(query);
         //llenar todos los parametros de la llamada al procedure
@@ -191,7 +191,7 @@ public class ControllerEmpresa {
         
         cstm.close();
         conn.close();
-        connMysql.cerrarConexion(conn);
+        connMysql.close();
         
         return e.getId_empresa();
     }

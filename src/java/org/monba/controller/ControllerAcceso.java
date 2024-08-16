@@ -21,7 +21,7 @@ public class ControllerAcceso {
         //2. Establecemos la conexion
         ConexionMySQL objConMySQL = new ConexionMySQL();
         try {
-            Connection conn = objConMySQL.abrirConexion();
+            Connection conn = objConMySQL.open();
             PreparedStatement pstmt = conn.prepareStatement(querySELECT);
 
             pstmt.setString(1, nombreUsuario);

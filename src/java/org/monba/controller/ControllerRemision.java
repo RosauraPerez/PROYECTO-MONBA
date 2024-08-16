@@ -26,7 +26,7 @@ public class ControllerRemision {
         // 1. Crear la sentencia SQL
         String query = "SELECT * FROM v_remisiones WHERE estatus_remision = 1 AND id_empleado = ?";
         // 2. Se establece la conexión con la BD
-        Connection conn = connMySQL.abrirConexion();
+        Connection conn = connMySQL.open();
         // 3. Se genera el statement para enviar la consulta
         PreparedStatement pstmt = conn.prepareStatement(query);
         pstmt.setInt(1, id_empleado);
@@ -143,7 +143,7 @@ public class ControllerRemision {
         rs.close();
         pstmt.close();
         conn.close();
-        connMySQL.cerrarConexion(conn);
+        connMySQL.close();
 
         // 7. Devolver la información
         return listaRemisiones;
@@ -156,7 +156,7 @@ public class ControllerRemision {
         // 1. Crear la sentencia SQL
         String query = "SELECT * FROM v_remisiones WHERE estatus_remision = 0 AND id_empleado = ?";
         // 2. Se establece la conexión con la BD
-        Connection conn = connMySQL.abrirConexion();
+        Connection conn = connMySQL.open();
         // 3. Se genera el statement para enviar la consulta
         PreparedStatement pstmt = conn.prepareStatement(query);
         pstmt.setInt(1, id_empleado);
@@ -273,7 +273,7 @@ public class ControllerRemision {
         rs.close();
         pstmt.close();
         conn.close();
-        connMySQL.cerrarConexion(conn);
+        connMySQL.close();
 
         // 7. Devolver la información
         return listaRemisiones;
@@ -286,7 +286,7 @@ public class ControllerRemision {
             //2.Generar la conexion con la BD
             ConexionMySQL connMysql = new ConexionMySQL();
             //abrir la conexion
-            Connection conn = connMysql.abrirConexion();
+            Connection conn = connMysql.open();
             //crear objeto que lleva la sentencia - Statement
             Statement stmt = conn.createStatement();
             //5.Ejecutar la query
@@ -301,7 +301,7 @@ public class ControllerRemision {
         String query = "{call InsertarRemision(?,?,?,?,?,?,?,?,?,?,?,?)}";
         ConexionMySQL connMysql = new ConexionMySQL();
         // se abre la conexion
-        Connection conn = connMysql.abrirConexion();
+        Connection conn = connMysql.open();
         // crear el steatment  que llevara la consulta
         CallableStatement cstm = (CallableStatement) conn.prepareCall(query);
         //llenar todos los parametros de la llamada al procedure
@@ -324,7 +324,7 @@ public class ControllerRemision {
         r.setId_remision(cstm.getInt(12));
         cstm.close();
         conn.close();
-        connMysql.cerrarConexion(conn);
+        connMysql.close();
         return r.getId_remision();
     }
     
@@ -332,7 +332,7 @@ public class ControllerRemision {
         String query = "{call ModificarRemision(?,?,?,?,?,?,?,?,?,?,?,?)}";
         ConexionMySQL connMysql = new ConexionMySQL();
         // se abre la conexion
-        Connection conn = connMysql.abrirConexion();
+        Connection conn = connMysql.open();
         // crear el steatment  que llevara la consulta
         CallableStatement cstm = (CallableStatement) conn.prepareCall(query);
         //llenar todos los parametros de la llamada al procedure
@@ -353,7 +353,7 @@ public class ControllerRemision {
 
         cstm.close();
         conn.close();
-        connMysql.cerrarConexion(conn);
+        connMysql.close();
         return r.getId_remision();
     }
     
