@@ -32,7 +32,11 @@ public class Empleado {
     public Empleado() {
     }
 
-    public Empleado(int id_empleado, String codigo, String fecha_ingreso, String puesto, String correo_electronico, int estatus, String comentario, String nombre_expediente, String expediente, String nombre_nomina, String pdf_nomina, String nombre_alta, String pdf_alta, String nombre_vacaciones, String pdf_vacaciones, String tipo_vehiculo, String num_placa, Persona Persona, Usuario Usuario) {
+    public Empleado(int id_empleado, String codigo, String fecha_ingreso, 
+            String puesto, String correo_electronico, int estatus, String comentario,
+            String nombre_expediente, String expediente, String nombre_nomina, String pdf_nomina, 
+            String nombre_alta, String pdf_alta, String nombre_vacaciones, String pdf_vacaciones, 
+            String tipo_vehiculo, String num_placa, Persona Persona, Usuario Usuario) {
         this.id_empleado = id_empleado;
         this.codigo = codigo;
         this.fecha_ingreso = fecha_ingreso;
@@ -204,6 +208,33 @@ public class Empleado {
 
     public void setUsuario(Usuario Usuario) {
         this.Usuario = Usuario;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Empleado{");
+        sb.append("id_empleado:").append(id_empleado);
+        sb.append(", codigo:").append(codigo);
+        sb.append(", fecha_ingreso:").append(fecha_ingreso);
+        sb.append(", puesto:").append(puesto);
+        sb.append(", correo_electronico:").append(correo_electronico);
+        sb.append(", estatus:").append(estatus);
+        sb.append(", comentario:").append(comentario);
+        sb.append(", nombre_expediente:").append(nombre_expediente);
+        sb.append(", expediente:").append(expediente);
+        sb.append(", nombre_nomina:").append(nombre_nomina);
+        sb.append(", pdf_nomina:").append(pdf_nomina);
+        sb.append(", nombre_alta:").append(nombre_alta);
+        sb.append(", pdf_alta:").append(pdf_alta);
+        sb.append(", nombre_vacaciones:").append(nombre_vacaciones);
+        sb.append(", pdf_vacaciones:").append(pdf_vacaciones);
+        sb.append(", tipo_vehiculo:").append(tipo_vehiculo);
+        sb.append(", num_placa:").append(num_placa);
+        sb.append(", Persona:").append(Persona);
+        sb.append(", Usuario:").append(Usuario);
+        sb.append('}');
+        return sb.toString();
     }
 
     
