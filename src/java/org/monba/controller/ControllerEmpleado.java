@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package org.monba.controller;
 
 import java.io.IOException;
@@ -290,7 +287,7 @@ public class ControllerEmpleado {
 
     public int modificar(Empleado e) throws ClassNotFoundException, SQLException, IOException {
         // 1. Generar la sentencia SQL
-        String query = "{call modificarEmpleado(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
+        String query = "call modificarEmpleado(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
         // 2. Crear la conexión a la BD
         ConexionMySQL conMySQL = new ConexionMySQL();
@@ -385,7 +382,7 @@ public class ControllerEmpleado {
             empleado.setEstatus(1);
             empleado.setComentario("Empleado de prueba");
             empleado.setNombre_expediente("expediente.pdf");
-            empleado.setExpediente("Expediente"); // Aquí podrías añadir un archivo en binario
+            empleado.setExpediente("Expediente"); 
             empleado.setTipo_vehiculo("Camión");
             empleado.setNum_placa("ABC123");
             empleado.setPersona(persona);

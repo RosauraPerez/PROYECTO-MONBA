@@ -24,9 +24,9 @@ export async function sendData(url, param, object) {
 
     try {
         const response = await fetch(url, requestOptions)
-
+        
         const jsonResponse = await response.json()
-
+        
         return jsonResponse
     } catch (error) {
         msg.successMessage('error', "Error al enviar los datos")

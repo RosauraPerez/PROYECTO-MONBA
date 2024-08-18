@@ -13,7 +13,7 @@ body {
 }
 
 .fondo {
-    background-color: #7f7f7f;
+    background-color: #1f3f6d;
 }
 
 .sidebar {
@@ -21,7 +21,7 @@ body {
     top: 0;
     left: 0;
     width: 80px; /* Ancho de la barra lateral contraída */
-    background: #1f3f6d;
+    background: #BDBDBD;
     padding: 6px 16px;
     height: 100%;
     box-shadow: 5px 0 30px rgba(0, 0, 0, .1);
@@ -35,7 +35,7 @@ body {
 
 .sidebar .logo_content .logo {
     display: flex;
-    color: white;
+    color: #1f3f6d;
     height: 50px;
     width: 100%;
     font-size: 30px;
@@ -57,7 +57,7 @@ body {
 
 .sidebar #btn {
     position: absolute;
-    color: white;
+    color: #1f3f6d;
     left: 50%;
     top: 6px;
     font-size: 20px;
@@ -88,10 +88,10 @@ body {
     border-radius: 20px;
     outline: none;
     border: none;
-    background: white;
+    background: #1f3f6d;
     padding-left: 50px;
     font-size: 15px;
-    color: black;
+    color: white;
     box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
     transition: all .5s ease;
 }
@@ -100,7 +100,7 @@ body {
     position: absolute;
     z-index: 99;
     font-size: 22px;
-    color: #1f3f6d;
+    color: white;
     transition: all .5s ease;
 }
 
@@ -136,7 +136,7 @@ body {
 }
 
 .sidebar ul li a {
-    color: white;
+    color: #1f3f6d;
     display: flex;
     text-decoration: none;
     align-items: center;
@@ -213,7 +213,6 @@ body {
     left: 240px; /* Posición del contenido principal cuando la barra está activa */
     width: calc(100% - 240px); /* Ancho del contenido principal cuando la barra está activa */
 }
-
 .tabla_encabezado {
     background-color: #9eb63c;
     color: white;
@@ -226,6 +225,16 @@ body {
     max-height: 500px; /* Ajusta la altura máxima según tus necesidades */
     overflow-y: auto;
     overflow-x: auto;
+}
+.tabla_encabezado th {
+    background-color: #9eb63c;
+    color: white;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    /* Añade padding y border según tu diseño */
+    padding: 10px;
+    border-bottom: 2px solid #ddd;
 }
 .encabezado_modulo {
     text-align: center;
@@ -260,7 +269,6 @@ h2.subtitulo_modulo {
     text-align: center;
     padding: 20px;
     border-radius: 10px;
-    font-family: 'Poppins', Arial, sans-serif;
     font-weight: bold;
 }
 .encabezado_modal {
@@ -271,4 +279,8 @@ h2.subtitulo_modulo {
     border-radius: 10px;
     font-family: 'Poppins', Arial, sans-serif;
     font-weight: bold;
+}
+.disabled {
+    pointer-events: none;
+    opacity: 0.6;
 }

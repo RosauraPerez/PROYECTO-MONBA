@@ -1,14 +1,15 @@
 import * as API from "./API/api_functions.js";
-import { getInputValues } from "./InputsHandler/inputs.js";
+import { getInputValues, convertToBase64 } from "./InputsHandler/inputs.js";
 import * as msg from "./SweetComponents/messages.js";
+
+const data = await getAllData()
 
 startModule()
 
-async function startModule() {
-    const data = await getAllData()
-
+function startModule() {
     cargarCatEmpleado(data)
     loadControlEvents(data)
+    actualizarFormatoDocumentos()
 }
 
 async function getAllData() {
@@ -31,7 +32,8 @@ function loadControlEvents(data) {
 function filterEmployees(name, data) {
     const employees = data
 
-    const resultado = employees.filter(employees => employees.Persona.nombre.toLowerCase().includes(name.toLowerCase()));
+    const resultado = employees.filter(employees => employees.Persona.nombre.toLowerCase().includes(name.toLowerCase()) ||
+        employees.puesto.toLowerCase().includes(name.toLowerCase()))
 
     if (name == '') {
         cargarCatEmpleado(data)
@@ -72,6 +74,8 @@ function crearTablaEmpleados(dataEmpleados) {
         let botonModificar = document.createElement('button')
         botonModificar.classList.add('btn', 'btn-warning', 'btn-md', 'font-weigth-bold', 'font-italic')
         botonModificar.innerHTML = "<i class='bi bi-pencil-square fa-lg'></i> Modificar"
+        botonModificar.setAttribute("data-target", "#ActualizarEmpleado")
+        botonModificar.setAttribute("data-toggle", "modal")
         botonModificarContenedor.appendChild(botonModificar)
 
         let botonEliminarContenedor = document.createElement('th')
@@ -104,21 +108,132 @@ function crearTablaEmpleados(dataEmpleados) {
 
         //botonEliminar.removeEventListener('click', () => borrarEmpleado(empleado.id_empleado))
         botonEliminar.addEventListener('click', () => borrarEmpleado(empleado.id_empleado))
+        botonModificar.addEventListener('click', () => cargarEmpleado(empleado.id_empleado, dataEmpleados))
 
         tableBody.appendChild(row)
     })
 }
 
-async function borrarEmpleado(idEmpleado) {
-    console.log(idEmpleado)
+function cargarEmpleado(idEmpleado, data) {
+    let empleadoSeleccionado = data.find(emp => emp.id_empleado == idEmpleado);
 
+    try {
+        let nombreActualizar = document.querySelector("#nombre_modificar").value = empleadoSeleccionado.Persona.nombre;
+        let apellidoPaternoActualizar = document.querySelector("#a_Paterno_modificar").value = empleadoSeleccionado.Persona.apellido_paterno;
+        let apellidoMaternoActualizar = document.querySelector("#a_Materno_modificar").value = empleadoSeleccionado.Persona.apellido_materno;
+        let generoActualizar = document.querySelector("#genero_modificar").value = empleadoSeleccionado.Persona.genero;
+        let fechaNacActualizar = document.querySelector("#fecha_nacimiento_modificar").value = empleadoSeleccionado.Persona.fecha_nacimiento;
+        let rfcActualizar = document.querySelector("#rfc_modificar").value = empleadoSeleccionado.Persona.rfc;
+        let curpActualizar = document.querySelector("#curp_modificar").value = empleadoSeleccionado.Persona.curp;
+        let domicilioActualizar = document.querySelector("#domicilio_modificar").value = empleadoSeleccionado.Persona.domicilio;
+        let cpActualizar = document.querySelector("#cp_modificar").value = empleadoSeleccionado.Persona.codigo_postal;
+        let ciudadActualizar = document.querySelector("#ciudad_modificar").value = empleadoSeleccionado.Persona.ciudad;
+        let estadoActualizar = document.querySelector("#estado_modificar").value = empleadoSeleccionado.Persona.estado;
+        let telefonoActualizar = document.querySelector("#telefono_modificar").value = empleadoSeleccionado.Persona.telefono;
+        let numLicActualizar = document.querySelector("#numero_licencia_modificar").value = empleadoSeleccionado.Persona.numero_licencia;
+        let tipoLicActualizar = document.querySelector("#tipo_licencia_modificar").value = empleadoSeleccionado.Persona.tipo_licencia;
+        let fotoActualizar = document.querySelector("#inputFoto_modificar").value = empleadoSeleccionado.Persona.foto;
+        //Datos de usuario
+        let nombreUsuarioActualizar = document.querySelector("#usuario_modificar").value = empleadoSeleccionado.Usuario.nombre_usuario;
+        let contraseñaUsuarioActualizar = document.querySelector("#contrasenia_modificar").value = empleadoSeleccionado.Usuario.contrasenia;
+        let rolActualizar = document.querySelector("#rol_modificar").value = empleadoSeleccionado.Usuario.rol;
+        // Datos de empleado
+        let codigoActualizar = document.querySelector("#codigoEmpleado_modificar").value = empleadoSeleccionado.codigo;
+        let fechaIngresoActualizar = document.querySelector("#fechaIngreso_modificar").value = empleadoSeleccionado.fecha_ingreso;
+        let puestoActualizar = document.querySelector("#puesto_modificar").value = empleadoSeleccionado.puesto;
+        let correoElectronicoActualizar = document.querySelector("#correo_modificar").value = empleadoSeleccionado.correo_electronico;
+        let estatusActualizar = document.querySelector("#estatus_modificar").value = empleadoSeleccionado.estatus;
+        let comentarioActualizar = document.querySelector("#comentario_modificar").value = empleadoSeleccionado.comentario;
+        let tipoVehiculoActualizar = document.querySelector("#tipo_vehiculo_modificar").value = empleadoSeleccionado.tipo_vehiculo;
+        let numPlacaActualizar = document.querySelector("#num_placa_modificar").value = empleadoSeleccionado.num_placa;
+        let nombreExpedienteActualizar = document.querySelector("#nombre_expediente_modificar").value = empleadoSeleccionado.nombre_expediente;
+        let expedienteActualizar = document.querySelector("#expediente_modificar").value = empleadoSeleccionado.expediente;
+        let nombreAltaActualizar = document.querySelector("#nombre_archivo_imss_modificar").value = empleadoSeleccionado.nombre_alta;
+        let pdfAltaActualizar = document.querySelector("#alta_imss_empleado_modificar").value = empleadoSeleccionado.pdf_alta;
+        let nombreNominaActualizar = document.querySelector("#nombre_archivo_nomina_modificar").value = empleadoSeleccionado.nombre_nomina;
+        let pdfNominaActualizar = document.querySelector("#nomina_modificar").value = empleadoSeleccionado.pdf_nomina;
+        let nombreVacacionesActualizar = document.querySelector("#nombre_vacaciones_modificar").value = empleadoSeleccionado.nombre_vacaciones;
+        let pdfVacacionesActualizar = document.querySelector("#formato_vacaciones_modificar").value = empleadoSeleccionado.pdf_vacaciones;
+    } catch (error) {
+        //Manejar los errores
+    }
+
+    // Asignar funcion para obtener todos los valores de los campos
+    let botonActualizar = document.querySelector("#btnModificar")
+    botonActualizar.onclick = () => obtenerDatosModificados(empleadoSeleccionado.id_empleado)   
+}
+
+function actualizarFormatoDocumentos() {
+    document.querySelector('#inputFoto_modificar_file').addEventListener('change', async function (e) {
+        const archivoSeleccionado = e.target.files[0] // Siempre toma el ultimo archivo agregado
+        const reader = new FileReader()
+        reader.onload = function (e) {
+            document.querySelector('#inputFoto_modificar').value = e.target.result
+        }
+        reader.readAsDataURL(archivoSeleccionado)
+    })
+
+    document.querySelector('#expediente_modificar_file').addEventListener('change', async function (e) {
+        const archivoSeleccionado = e.target.files[0] // Siempre toma el ultimo archivo agregado
+        const reader = new FileReader()
+        reader.onload = function (e) {
+            document.querySelector('#expediente_modificar').value = e.target.result
+        }
+        reader.readAsDataURL(archivoSeleccionado)
+    })
+
+    document.querySelector('#alta_imss_empleado_modificar_file').addEventListener('change', async function (e) {
+        const archivoSeleccionado = e.target.files[0] // Siempre toma el ultimo archivo agregado
+        const reader = new FileReader()
+        reader.onload = function (e) {
+            document.querySelector('#alta_imss_empleado_modificar').value = e.target.result
+        }
+        reader.readAsDataURL(archivoSeleccionado)
+    })
+
+    document.querySelector('#nomina_modificar_file').addEventListener('change', async function (e) {
+        const archivoSeleccionado = e.target.files[0] // Siempre toma el ultimo archivo agregado
+        const reader = new FileReader()
+        reader.onload = function (e) {
+            document.querySelector('#nomina_modificar').value = e.target.result
+        }
+        reader.readAsDataURL(archivoSeleccionado)
+    })
+
+    document.querySelector('#formato_vacaciones_modificar_file').addEventListener('change', async function (e) {
+        const archivoSeleccionado = e.target.files[0] // Siempre toma el ultimo archivo agregado
+        const reader = new FileReader()
+        reader.onload = function (e) {
+            document.querySelector('#formato_vacaciones_modificar').value = e.target.result
+        }
+        reader.readAsDataURL(archivoSeleccionado)
+    })
+}
+
+async function obtenerDatosModificados(idEmpleado) {
+    const formularioValores = await getInputValues(getAllInputsModificar())
+
+    actualizarDatosEmpleado(idEmpleado, formularioValores)
+}
+
+async function actualizarDatosEmpleado(idEmpleado, datos) {
+    const URL = 'http://localhost:8080/PROYECTO-MONBA/api/empleado/update'
+
+    const objetoEmpleado = CrearJsonEmpleadoModificar(datos, idEmpleado)
+
+    const apiResponse = await API.sendData(URL, "e", objetoEmpleado)
+
+    console.log(apiResponse)
+}
+
+async function borrarEmpleado(idEmpleado) {
     const URL = `http://localhost:8080/PROYECTO-MONBA/api/empleado/delete`
 
     const response = await API.sendData(URL, "id", idEmpleado)
 
     if (response.response == 'OK') {
         msg.successMessage('success', 'Empleado eliminado')
-        cargarCatEmpleado()
+        startModule()
     } else {
         msg.errorMessage("Error al eliminar el empleado", "No se elimino el empleado", "Intentelo nuevamente")
     }
@@ -169,6 +284,49 @@ function getAllInputs() {
     return inputs
 }
 
+function getAllInputsModificar() {
+    const inputs = [
+        { ID: '#nombre_modificar', NAME: "nombre", KEY: 'Nombre' },
+        { ID: '#a_Paterno_modificar', NAME: "apellido_paterno", KEY: 'Apellido Paterno' },
+        { ID: '#a_Materno_modificar', NAME: "apellido_materno", KEY: 'Apellido Materno' },
+        { ID: '#genero_modificar', NAME: "genero", KEY: 'Genero' },
+        { ID: '#fecha_nacimiento_modificar', NAME: "fecha_nacimiento", KEY: 'Fecha de Nacimiento' },
+        { ID: '#rfc_modificar', NAME: "rfc", KEY: 'RFC' },
+        { ID: '#curp_modificar', NAME: "curp", KEY: 'CURP' },
+        { ID: '#domicilio_modificar', NAME: "domicilio", KEY: 'Domicilio' },
+        { ID: '#cp_modificar', NAME: "codigo_postal", KEY: 'Codigo Postal' },
+        { ID: '#ciudad_modificar', NAME: "ciudad", KEY: 'Ciudad' },
+        { ID: '#estado_modificar', NAME: "estado", KEY: 'Estado' },
+        { ID: '#telefono_modificar', NAME: "telefono", KEY: 'Telefono' },
+        { ID: '#numero_licencia_modificar', NAME: "numero_licencia", KEY: 'Numero de licencia' },
+        { ID: '#tipo_licencia_modificar', NAME: "tipo_licencia", KEY: 'Tipo de licencia' },
+
+        { ID: '#inputFoto_modificar', NAME: "foto", KEY: 'Foto', TYPE: 'img' },
+        { ID: '#usuario_modificar', NAME: "nombre_usuario", KEY: 'Usuario' },
+        { ID: '#contrasenia_modificar', NAME: "contrasenia", KEY: 'Contraseña' },
+        { ID: '#rol_modificar', NAME: "rol", KEY: 'Rol' },
+
+        { ID: '#codigoEmpleado_modificar', NAME: "codigo", KEY: 'Codigo del empleado' },
+        { ID: '#fechaIngreso_modificar', NAME: "fecha_ingreso", KEY: 'Fecha de Ingreso' },
+        { ID: '#puesto_modificar', NAME: "puesto", KEY: 'Puesto' },
+        { ID: '#correo_modificar', NAME: "correo_electronico", KEY: 'Correo' },
+        { ID: '#estatus_modificar', NAME: "estatus", KEY: 'Estatus' },
+        { ID: '#comentario_modificar', NAME: "comentario", KEY: 'Comentarios' },
+        { ID: '#tipo_vehiculo_modificar', NAME: "tipo_vehiculo", KEY: 'Tipo de vehiculo' },
+        { ID: '#num_placa_modificar', NAME: "num_placa", KEY: 'Numero de placa' },
+
+        { ID: '#nombre_expediente_modificar', NAME: "nombre_expediente", KEY: 'Nombre de expediente' },
+        { ID: '#expediente_modificar', NAME: "expediente", KEY: 'Expediente', TYPE: 'pdf' },
+        { ID: '#nombre_archivo_imss_modificar', NAME: "nombre_alta", KEY: 'Nombre de archivo IMSS' },
+        { ID: '#alta_imss_empleado_modificar', NAME: "pdf_alta", KEY: 'Alta del IMSS', TYPE: 'pdf' },
+        { ID: '#nombre_archivo_nomina_modificar', NAME: "nombre_nomina", KEY: 'Nombre de archivo nomina' },
+        { ID: '#nomina_modificar', NAME: "pdf_nomina", KEY: 'Nomina', TYPE: 'pdf' },
+        { ID: '#nombre_vacaciones_modificar', NAME: "nombre_vacaciones", KEY: 'Nombre del archivo vacaciones' },
+        { ID: '#formato_vacaciones_modificar', NAME: "pdf_vacaciones", KEY: 'Formato vacaciones', TYPE: 'pdf' }
+    ]
+    return inputs
+}
+
 
 /// Creamos el Json con los datos de los inputs
 function CrearJsonEmpleado(data) {
@@ -180,13 +338,58 @@ function CrearJsonEmpleado(data) {
         "estatus": data.estatus || "",
         "comentario": data.comentario || "",
         "nombre_expediente": data.nombre_expediente || "",
-        "expediente": data.expediente || [],
+        "expediente": data.expediente || "",
         "nombre_nomina": data.nombre_nomina || "",
-        "pdf_nomina": data.pdf_nomina || [],
+        "pdf_nomina": data.pdf_nomina || "",
         "nombre_alta": data.nombre_alta || "",
-        "pdf_alta": data.pdf_alta || [],
+        "pdf_alta": data.pdf_alta || "",
         "nombre_vacaciones": data.nombre_vacaciones || "",
-        "pdf_vacaciones": data.pdf_vacaciones || [],
+        "pdf_vacaciones": data.pdf_vacaciones || "",
+        "tipo_vehiculo": data.tipo_vehiculo || "",
+        "num_placa": data.num_placa || "",
+        "Persona": {
+            "nombre": data.nombre || "",
+            "apellido_paterno": data.apellido_paterno || "",
+            "apellido_materno": data.apellido_materno || "",
+            "genero": data.genero || "",
+            "fecha_nacimiento": data.fecha_nacimiento || "",
+            "rfc": data.rfc || "",
+            "curp": data.curp || "",
+            "domicilio": data.domicilio || "",
+            "codigo_postal": data.codigo_postal || "",
+            "ciudad": data.ciudad || "",
+            "estado": data.estado || "",
+            "telefono": data.telefono || "",
+            "foto": data.foto || "",
+            "numero_licencia": data.numero_licencia || "",
+            "tipo_licencia": data.tipo_licencia || ""
+        },
+        "Usuario": {
+            "nombre_usuario": data.nombre_usuario || "",
+            "contrasenia": data.contrasenia || "",
+            "rol": data.rol || ""
+        }
+    }
+    return empleado;
+}
+
+function CrearJsonEmpleadoModificar(data, idEmpleado) {
+    const empleado = {
+        "id_empleado": idEmpleado || "",
+        "codigo": data.codigo || "",
+        "fecha_ingreso": data.fecha_ingreso || "",
+        "puesto": data.puesto || "",
+        "correo_electronico": data.correo_electronico || "",
+        "estatus": data.estatus || "",
+        "comentario": data.comentario || "",
+        "nombre_expediente": data.nombre_expediente || "",
+        "expediente": data.expediente || "",
+        "nombre_nomina": data.nombre_nomina || "",
+        "pdf_nomina": data.pdf_nomina || "",
+        "nombre_alta": data.nombre_alta || "",
+        "pdf_alta": data.pdf_alta || "",
+        "nombre_vacaciones": data.nombre_vacaciones || "",
+        "pdf_vacaciones": data.pdf_vacaciones || "",
         "tipo_vehiculo": data.tipo_vehiculo || "",
         "num_placa": data.num_placa || "",
         "Persona": {
