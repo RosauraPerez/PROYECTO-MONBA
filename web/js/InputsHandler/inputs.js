@@ -23,7 +23,7 @@ export async function getInputValues(inputs) {
 }
 
 /// Convertir archivos a base64
-function convertToBase64(file) {
+export function convertToBase64(file) {
     const MAX_FILE_SIZE = 5 // 5MB de peso maximo por archivo
 
     return new Promise((resolve, reject) => {

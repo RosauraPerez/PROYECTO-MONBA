@@ -253,15 +253,10 @@ public class ControllerEmpleado {
 
     public void delete(Empleado e) throws ClassNotFoundException {
         try {
-            //1. Generar la consulta
             String query = "UPDATE empleado SET estatus=0 WHERE id_empleado=" + e.getId_empleado() + ";";
-            //2.Generar la conexion con el gestor
             ConexionMySQL objConnMySQL = new ConexionMySQL();
-            //3.Abrir la conexion
             Connection conn = objConnMySQL.open();
-            //4.Crear objeto que lleva la sentencia - Stament
             Statement stmt = conn.createStatement();
-            //5.Ejecutar la query
             stmt.execute(query);
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -279,7 +274,7 @@ public class ControllerEmpleado {
             //4.Crear objeto que lleva la sentencia - Stament
             Statement stmt = conn.createStatement();
             //5.Ejecutar la query
-            stmt.execute(query);
+            stmt.executeUpdate(query);
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -287,7 +282,7 @@ public class ControllerEmpleado {
 
     public int modificar(Empleado e) throws ClassNotFoundException, SQLException, IOException {
         // 1. Generar la sentencia SQL
-        String query = "{call modificarEmpleado(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
+        String query = "call modificarEmpleado(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
         // 2. Crear la conexión a la BD
         ConexionMySQL conMySQL = new ConexionMySQL();

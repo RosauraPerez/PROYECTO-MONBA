@@ -1,652 +1,661 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Empleados</title>
-        <link href="../style/style_manifiestos_1.css" rel="stylesheet" type="text/css" />
-        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-        <!-- SweetAlert2 CSS -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Empleados</title>
+    <link href="../style/style_manifiestos_1.css" rel="stylesheet" type="text/css" />
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <!-- SweetAlert2 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 
-        <!-- SweetAlert2 JS -->
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- SweetAlert2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    </head>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
 
-    <body class="fondo">
-        <div class="sidebar">
-            <div class="logo_content">
-                <div class="logo">
-                    <i class="bi bi-bug-fill"></i>
-                    <div class="logo_name">MONBA</div>
-                </div>
-                <i class='bx bx-menu' id="btn"></i>
+<body class="fondo">
+    <div class="sidebar">
+        <div class="logo_content">
+            <div class="logo">
+                <i class="bi bi-bug-fill"></i>
+                <div class="logo_name">MONBA</div>
             </div>
-            <div class="src">
-                <i class='bx bx-search'></i>
-                <input id="inputBusqueda" type="text" placeholder="Buscar..">
-            </div>
-            <ul>
-                <li>
-                    <a href="html/VistaAdministrador_Agregar.html">
-                        <i class="bi bi-person-fill-add"></i>
-                        <span class="link_name">Agregar Empleado</span>
-                    </a>
-                    <span class="tooltip">Agregar Empleado</span>
-                </li>
-                <li>
-                    <a href="Vista_Administrador_Eliminar.html">
-                        <i class="bi bi-person-fill-dash"></i>
-                        <span class="link_name">Eliminar Empeado</span>
-                    </a>
-                    <span class="tooltip">Eliminar Empeado</span>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="bi bi-house-gear-fill"></i>
-                        <span class="link_name">Configuración Perfil</span>
-                    </a>
-                    <span class="tooltip">Configuración Perfil</span>
-                </li>
-            </ul>
+            <i class='bx bx-menu' id="btn"></i>
         </div>
-
-
-        <div class="home_content">
-            <h2 class="encabezado_modulo">MÓDULO EMPLEADOS</h2>
-            <div class="container mt-5">
-                <div class="d-flex">
-                    <h2 class="mb-4 subtitulo_modulo">Catálogo de Empleados</h2>
-                    <button type="button" class="ml-auto boton" data-toggle="modal" data-target="#registrarEmpleado"><i
-                            class="bi bi-card-checklist"></i> REGISTRAR</button>
-                </div>
-                <table class="table table-light table-bordered table-hover">
-                    <thead class="tabla_encabezado">
-                        <tr>
-                            <th>Nombre</th>
-                            <th>Apellido Paterno</th>
-                            <th>Apellido Materno</th>
-                            <th>Puesto</th>
-                            <th>Modificar Registros</th>
-                            <th>Eliminar Registros</th>
-                        </tr>
-                    </thead>
-                    <tbody class="id_empleado">
-                    </tbody>
-                </table>
-            </div>
+        <div class="src">
+            <i class='bx bx-search'></i>
+            <input id="inputBusqueda" type="text" placeholder="Buscar..">
         </div>
-        <section>
-            <div class="modal fade" id="registrarEmpleado" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                 aria-hidden="true">
-                <div class="modal-dialog modal-lg" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="encabezado_modal" id="etiqueta_modal">Formulario Emleados</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
+        <ul>
+            <li>
+                <a href="Vista_Administrador_Agregar.html">
+                    <i class="bi bi-person-fill-add"></i>
+                    <span class="link_name">Agregar Empleado</span>
+                </a>
+                <span class="tooltip">Agregar Empleado</span>
+            </li>
+            <li>
+                <a href="Vista_Administrador_Eliminar.html">
+                    <i class="bi bi-person-fill-dash"></i>
+                    <span class="link_name">Eliminar Empeado</span>
+                </a>
+                <span class="tooltip">Eliminar Empeado</span>
+            </li>
+            <li>
+                <a href="#">
+                    <i class="bi bi-house-gear-fill"></i>
+                    <span class="link_name">Configuración Perfil</span>
+                </a>
+                <span class="tooltip">Configuración Perfil</span>
+            </li>
+        </ul>
+    </div>
 
-                            <form class="border">
-                                <div class="col-md-12">
-                                    <!-- Datos Personales -->
-                                    <div class="container mt-4">
-                                        <h5 class="label_modal">Datos Personales:</h5>
-                                        <div class="row mt-3">
-                                            <div class="col-md-3">
-                                                <label for="nombre">Nombre</label>
-                                                <input type="text" class="form-control" id="nombre">
-                                            </div>
-                                            <div class="col-md-3">
-                                                <label for="a_Paterno">Apellido Paterno</label>
-                                                <input type="text" class="form-control" id="a_Paterno">
-                                            </div>
-                                            <div class="col-md-3">
-                                                <label for="a_Materno">Apellido Materno</label>
-                                                <input type="text" class="form-control" id="a_Materno">
-                                            </div>
-                                            <div class="col-md-3">
-                                                <label for="genero">Género</label>
-                                                <select class="form-control" id="genero" name="unidad">
-                                                    <option value="" disabled selected>Selecciona</option>
-                                                    <option value="Femenino">Femenino</option>
-                                                    <option value="Masculino">Masculino</option>
-                                                    <option value="Otro">Otro</option>
-                                                </select>
-                                            </div>
+
+    <div class="home_content">
+        <h2 class="encabezado_modulo">MÓDULO EMPLEADOS</h2>
+        <div class="container mt-5">
+            <div class="d-flex">
+                <h2 class="mb-4 subtitulo_modulo">Catálogo de Empleados</h2>
+                <button type="button" class="ml-auto boton" data-toggle="modal" data-target="#registrarEmpleado"><i
+                        class="bi bi-card-checklist"></i> REGISTRAR</button>
+            </div>
+            <table class="table table-light table-bordered table-hover">
+                <thead class="tabla_encabezado">
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Apellido Paterno</th>
+                        <th>Apellido Materno</th>
+                        <th>Puesto</th>
+                        <th>Modificar Registros</th>
+                        <th>Eliminar Registros</th>
+                    </tr>
+                </thead>
+                <tbody class="id_empleado">
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <section>
+        <div class="modal fade" id="registrarEmpleado" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="encabezado_modal" id="etiqueta_modal">Formulario Emleados</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+                        <form class="border">
+                            <div class="col-md-12">
+                                <!-- Datos Personales -->
+                                <div class="container mt-4">
+                                    <h5 class="label_modal">Datos Personales:</h5>
+                                    <div class="row mt-3">
+                                        <div class="col-md-3">
+                                            <label for="nombre">Nombre</label>
+                                            <input type="text" class="form-control" id="nombre">
                                         </div>
-                                        <div class="row mt-3">
-                                            <div class="col-md-3">
-                                                <label for="fecha_nacimiento">Fecha Nacimiento:</label>
-                                                <input type="date" class="form-control" id="fecha_nacimiento">
-                                            </div>
-                                            <div class="col-md-3">
-                                                <label for="rfc">RFC</label>
-                                                <input type="text" class="form-control" id="rfc">
-                                            </div>
-                                            <div class="col-md-3">
-                                                <label for="curp">CURP</label>
-                                                <input type="text" class="form-control" id="curp">
-                                            </div>
-                                            <div class="col-md-3">
-                                                <label for="domicilio">Domicilio</label>
-                                                <input type="text" class="form-control" id="domicilio">
-                                            </div>
+                                        <div class="col-md-3">
+                                            <label for="a_Paterno">Apellido Paterno</label>
+                                            <input type="text" class="form-control" id="a_Paterno">
                                         </div>
-                                        <div class="row mt-3">
-                                            <div class="col-md-3">
-                                                <label for="cp">Código Postal</label>
-                                                <input type="text" class="form-control" id="cp">
-                                            </div>
-                                            <div class="col-md-3">
-                                                <label for="ciudad">Ciudad</label>
-                                                <input type="text" class="form-control" id="ciudad">
-                                            </div>
-                                            <div class="col-md-3">
-                                                <label for="estado">Estado</label>
-                                                <input type="text" class="form-control" id="estado">
-                                            </div>
-                                            <div class="col-md-3">
-                                                <label for="telefono">Teléfono</label>
-                                                <input type="text" class="form-control" id="telefono">
-                                            </div>
+                                        <div class="col-md-3">
+                                            <label for="a_Materno">Apellido Materno</label>
+                                            <input type="text" class="form-control" id="a_Materno">
                                         </div>
-                                        <div class="row mt-3">
-                                            <div class="col-md-6">
-                                                <label for="numero_licencia">No. Licencia</label>
-                                                <input type="text" class="form-control" id="numero_licencia">
-                                            </div>
-                                            <div class="col-md-6">
-                                                <label for="tipo_licencia">Tipo de Licencia</label>
-                                                <input type="text" class="form-control" id="tipo_licencia">
-                                            </div>
+                                        <div class="col-md-3">
+                                            <label for="genero">Género</label>
+                                            <select class="form-control" id="genero" name="unidad">
+                                                <option value="" disabled selected>Selecciona</option>
+                                                <option value="Femenino">Femenino</option>
+                                                <option value="Masculino">Masculino</option>
+                                                <option value="Otro">Otro</option>
+                                            </select>
                                         </div>
-                                        <div class="row mt-3">
-                                            <div class="col-md-6">
-                                                <div class="sidebar ms-2 text-center pb-2"
-                                                     style="width: 186px; border-color: green">
-                                                    <div class="row mt-2">
-                                                        <div class="col-12">
-                                                            <img id="imgFoto" src="" style="width: 156px; height: 156px;" />
-                                                            <textarea id="textoFoto" style="width: 156px;"></textarea>
-                                                        </div>
+                                    </div>
+                                    <div class="row mt-3">
+                                        <div class="col-md-3">
+                                            <label for="fecha_nacimiento">Fecha Nacimiento:</label>
+                                            <input type="date" class="form-control" id="fecha_nacimiento">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label for="rfc">RFC</label>
+                                            <input type="text" class="form-control" id="rfc">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label for="curp">CURP</label>
+                                            <input type="text" class="form-control" id="curp">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label for="domicilio">Domicilio</label>
+                                            <input type="text" class="form-control" id="domicilio">
+                                        </div>
+                                    </div>
+                                    <div class="row mt-3">
+                                        <div class="col-md-3">
+                                            <label for="cp">Código Postal</label>
+                                            <input type="text" class="form-control" id="cp">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label for="ciudad">Ciudad</label>
+                                            <input type="text" class="form-control" id="ciudad">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label for="estado">Estado</label>
+                                            <input type="text" class="form-control" id="estado">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label for="telefono">Teléfono</label>
+                                            <input type="text" class="form-control" id="telefono">
+                                        </div>
+                                    </div>
+                                    <div class="row mt-3">
+                                        <div class="col-md-6">
+                                            <label for="numero_licencia">No. Licencia</label>
+                                            <input type="text" class="form-control" id="numero_licencia">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="tipo_licencia">Tipo de Licencia</label>
+                                            <input type="text" class="form-control" id="tipo_licencia">
+                                        </div>
+                                    </div>
+                                    <div class="row mt-3">
+                                        <div class="col-md-6">
+                                            <div class="sidebar ms-2 text-center pb-2"
+                                                style="width: 186px; border-color: green">
+                                                <div class="row mt-2">
+                                                    <div class="col-12">
+                                                        <img id="imgFoto" src="" style="width: 156px; height: 156px;" />
+                                                        <textarea id="textoFoto" style="width: 156px;"></textarea>
                                                     </div>
-                                                    <div class="row mt-2">
-                                                        <div class="col-12">
-                                                            <button type="button" id="btnSeleccionarImagen"
-                                                                    class="btn btn-outline-success" >
-                                                                <i class="bi bi-upload"></i>&nbsp;&nbsp;
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row mt-2">
-                                                        <div class="col-12">
-                                                            <input id="inputFoto" type="file" />
-                                                        </div>
+                                                </div>
+                                                <div class="row mt-2">
+                                                    <div class="col-12">
+                                                        <button type="button" id="btnSeleccionarImagen"
+                                                            class="btn btn-outline-success">
+                                                            <i class="bi bi-upload"></i>&nbsp;&nbsp;
+                                                        </button>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-                                    <div class="container mt-4">
-                                        <h5 class="label_modal">Datos de Usuario:</h5>
-                                        <div class="row mt-3">
-                                            <div class="col-md-4">
-                                                <label for="usuario">Usuario</label>
-                                                <input type="text" class="form-control" id="usuario">
-                                            </div>
-                                            <div class="col-md-4">
-                                                <label for="contrasenia">Contraseña</label>
-                                                <input type="password" class="form-control" id="contrasenia">
-                                            </div>
-                                            <div class="col-md-4">
-                                                <label for="rol">Rol</label>
-                                                <input type="text" class="form-control" id="rol">
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-                                    <div class="container mt-4">
-                                        <h5 class="label_modal">Datos de Empleado:</h5>
-                                        <div class="row mt-3">
-                                            <div class="col-md-3">
-                                                <label for="codigoEmpleado">Código Empleado</label>
-                                                <input type="text" class="form-control" id="codigoEmpleado">
-                                            </div>
-                                            <div class="col-md-3">
-                                                <label for="fechaIngreso">Fecha Ingreso</label>
-                                                <input type="date" class="form-control" id="fechaIngreso">
-                                            </div>
-                                            <div class="col-md-3">
-                                                <label for="puesto">Puesto</label>
-                                                <input type="text" class="form-control" id="puesto">
-                                            </div>
-                                            <div class="col-md-3">
-                                                <label for="correo">Correo Electrónico</label>
-                                                <input type="email" class="form-control" id="correo">
-                                            </div>
-                                        </div>
-                                        <div class="row mt-3">
-                                            <div class="col-md-3">
-                                                <label for="estatus">Estatus</label>
-                                                <select class="form-control" id="estatus" name="estatus">
-                                                    <option value="" disabled selected>Selecciona</option>
-                                                    <option value="1">Activo</option>
-                                                    <option value="0">Inactivo</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <label for="comentario">Comentarios</label>
-                                                <input type="text" class="form-control" id="comentario">
-                                            </div>
-                                            <div class="col-md-3">
-                                                <label for="tipo_vehiculo">Tipo Vehículo</label>
-                                                <input type="text" class="form-control" id="tipo_vehiculo">
-                                            </div>
-                                            <div class="col-md-3">
-                                                <label for="num_placa">Número Placa</label>
-                                                <input type="text" class="form-control" id="num_placa">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="container mt-4">
-                                        <h5 class="label_modal">Expediente</h5>
-                                        <div class="row mt-3">
-                                            <div class="col-md-6">
-                                                <label for="expediente">Nombre del archivo:</label>
-
-                                            </div>
-                                            <div class="col-md-6">
-                                                <input type="text" class="form-control" id="nombre_expediente">
-                                            </div>
-
-                                        </div>
-                                        <div class="row mt-3">
-                                            <div class="col-md-12">
-                                                <input type="file" class="form-control" id="expediente" accept=".pdf">
-                                                <div id="pdfPreviewContainer" style="margin-top: 20px;">
-                                                    <iframe id="expediente" style="width: 50%; height: 50px;"
-                                                            frameborder="0"></iframe>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="container mt-4">
-                                        <h5 class="label_modal">Otros Documentos:</h5>
-                                        <div class="row mt-3">
-                                            <div class="col-md-6">
-                                                <label for="alta_imss_empleado">Alta del IMSS del Empleado:</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <input type="text" class="form-control" id="nombre_archivo_imss"
-                                                       value="nombre del arcivo">
-                                            </div>
-                                        </div>
-                                        <div class="row mt-3">
-                                            <div class="col-md-12">
-                                                <input type="file" class="form-control" id="alta_imss_empleado"
-                                                       accept=".pdf">
-                                                <div id="pdfPreviewContainer" style="margin-top: 20px;">
-                                                    <iframe id="alta_imss_empleado" style="width: 50%; height: 50px;"
-                                                            frameborder="0"></iframe>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row mt-3">
-                                            <div class="col-md-6">
-                                                <label for="nomina">Nómina:</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <input type="text" class="form-control" id="nombre_archivo_nomina"
-                                                       value="nombre del arcivo">
-                                            </div>
-                                        </div>
-                                        <div class="row mt-3">
-                                            <div class="col-md-12">
-                                                <input type="file" class="form-control" id="nomina" accept=".pdf">
-                                                <div id="pdfPreviewContainer" style="margin-top: 20px;">
-                                                    <iframe id="nomina" style="width: 50%; height: 50px;"
-                                                            frameborder="0"></iframe>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row mt-3">
-                                            <div class="col-md-6">
-                                                <label for="vacaciones">Formato Vacaciones:</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <input type="text" class="form-control" id="nombre_vacaciones"
-                                                       value="nombre del arcivo">
-                                            </div>
-                                        </div>
-                                        <div class="row mt-3">
-                                            <div class="col-md-12">
-                                                <input type="file" class="form-control" id="formato_vacaciones"
-                                                       accept=".pdf">
-                                                <div id="pdfPreviewContainer" style="margin-top: 20px;">
-                                                    <iframe id="formato_vacaciones" style="width: 50%; height: 50px;"
-                                                            frameborder="0"></iframe>
+                                                <div class="row mt-2">
+                                                    <div class="col-12">
+                                                        <input id="inputFoto" type="file" />
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <!-- Campos ocultos -->
-                                <input type="hidden" id="idPersona">
-                                <input type="hidden" id="idUsuario">
-                                <input type="hidden" id="idEmpleado">
 
-                                <!-- Botones del formulario -->
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                                    <button type="button" class="btn btn-primary" id="btnGuardar">Guardar</button>
+                                <div class="container mt-4">
+                                    <h5 class="label_modal">Datos de Usuario:</h5>
+                                    <div class="row mt-3">
+                                        <div class="col-md-4">
+                                            <label for="usuario">Usuario</label>
+                                            <input type="text" class="form-control" id="usuario">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="contrasenia">Contraseña</label>
+                                            <input type="password" class="form-control" id="contrasenia">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="rol">Rol</label>
+                                            <input type="text" class="form-control" id="rol">
+                                        </div>
+                                    </div>
                                 </div>
-                            </form>
-                        </div>
+
+
+                                <div class="container mt-4">
+                                    <h5 class="label_modal">Datos de Empleado:</h5>
+                                    <div class="row mt-3">
+                                        <div class="col-md-3">
+                                            <label for="codigoEmpleado">Código Empleado</label>
+                                            <input type="text" class="form-control" id="codigoEmpleado">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label for="fechaIngreso">Fecha Ingreso</label>
+                                            <input type="date" class="form-control" id="fechaIngreso">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label for="puesto">Puesto</label>
+                                            <input type="text" class="form-control" id="puesto">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label for="correo">Correo Electrónico</label>
+                                            <input type="email" class="form-control" id="correo">
+                                        </div>
+                                    </div>
+                                    <div class="row mt-3">
+                                        <div class="col-md-3">
+                                            <label for="estatus">Estatus</label>
+                                            <select class="form-control" id="estatus" name="estatus">
+                                                <option value="" disabled selected>Selecciona</option>
+                                                <option value="1">Activo</option>
+                                                <option value="0">Inactivo</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label for="comentario">Comentarios</label>
+                                            <input type="text" class="form-control" id="comentario">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label for="tipo_vehiculo">Tipo Vehículo</label>
+                                            <input type="text" class="form-control" id="tipo_vehiculo">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label for="num_placa">Número Placa</label>
+                                            <input type="text" class="form-control" id="num_placa">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="container mt-4">
+                                    <h5 class="label_modal">Expediente</h5>
+                                    <div class="row mt-3">
+                                        <div class="col-md-6">
+                                            <label for="expediente">Nombre del archivo:</label>
+
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input type="text" class="form-control" id="nombre_expediente">
+                                        </div>
+
+                                    </div>
+                                    <div class="row mt-3">
+                                        <div class="col-md-12">
+                                            <input type="file" class="form-control" id="expediente" accept=".pdf">
+                                            <div id="pdfPreviewContainer" style="margin-top: 20px;">
+                                                <iframe id="expediente" style="width: 50%; height: 50px;"
+                                                    frameborder="0"></iframe>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="container mt-4">
+                                    <h5 class="label_modal">Otros Documentos:</h5>
+                                    <div class="row mt-3">
+                                        <div class="col-md-6">
+                                            <label for="alta_imss_empleado">Alta del IMSS del Empleado:</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input type="text" class="form-control" id="nombre_archivo_imss"
+                                                value="nombre del arcivo">
+                                        </div>
+                                    </div>
+                                    <div class="row mt-3">
+                                        <div class="col-md-12">
+                                            <input type="file" class="form-control" id="alta_imss_empleado"
+                                                accept=".pdf">
+                                            <div id="pdfPreviewContainer" style="margin-top: 20px;">
+                                                <iframe id="alta_imss_empleado" style="width: 50%; height: 50px;"
+                                                    frameborder="0"></iframe>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-3">
+                                        <div class="col-md-6">
+                                            <label for="nomina">Nómina:</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input type="text" class="form-control" id="nombre_archivo_nomina"
+                                                value="nombre del arcivo">
+                                        </div>
+                                    </div>
+                                    <div class="row mt-3">
+                                        <div class="col-md-12">
+                                            <input type="file" class="form-control" id="nomina" accept=".pdf">
+                                            <div id="pdfPreviewContainer" style="margin-top: 20px;">
+                                                <iframe id="nomina" style="width: 50%; height: 50px;"
+                                                    frameborder="0"></iframe>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-3">
+                                        <div class="col-md-6">
+                                            <label for="vacaciones">Formato Vacaciones:</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input type="text" class="form-control" id="nombre_vacaciones"
+                                                value="nombre del arcivo">
+                                        </div>
+                                    </div>
+                                    <div class="row mt-3">
+                                        <div class="col-md-12">
+                                            <input type="file" class="form-control" id="formato_vacaciones"
+                                                accept=".pdf">
+                                            <div id="pdfPreviewContainer" style="margin-top: 20px;">
+                                                <iframe id="formato_vacaciones" style="width: 50%; height: 50px;"
+                                                    frameborder="0"></iframe>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Campos ocultos -->
+                            <input type="hidden" id="idPersona">
+                            <input type="hidden" id="idUsuario">
+                            <input type="hidden" id="idEmpleado">
+
+                            <!-- Botones del formulario -->
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                <button type="button" class="btn btn-primary" id="btnGuardar">Guardar</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
-        </section>
-        
-        <section>
-            <div class="modal fade" id="ActualizarEmpleado" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                 aria-hidden="true">
-                <div class="modal-dialog modal-lg" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="encabezado_modal" id="etiqueta_modal_modificar">Formulario Emleados</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
+        </div>
+    </section>
 
-                            <form class="border">
-                                <div class="col-md-12">
-                                    <!-- Datos Personales -->
-                                    <div class="container mt-4">
-                                        <h5 class="label_modal">Datos Personales:</h5>
-                                        <div class="row mt-3">
-                                            <div class="col-md-3">
-                                                <label for="nombre">Nombre</label>
-                                                <input type="text" class="form-control" id="nombre_modificar">
-                                            </div>
-                                            <div class="col-md-3">
-                                                <label for="a_Paterno">Apellido Paterno</label>
-                                                <input type="text" class="form-control" id="a_Paterno_modificar">
-                                            </div>
-                                            <div class="col-md-3">
-                                                <label for="a_Materno">Apellido Materno</label>
-                                                <input type="text" class="form-control" id="a_Materno_modificar">
-                                            </div>
-                                            <div class="col-md-3">
-                                                <label for="genero">Género</label>
-                                                <select class="form-control" id="genero_modificar" name="unidad">
-                                                    <option value="" disabled selected>Selecciona</option>
-                                                    <option value="Femenino">Femenino</option>
-                                                    <option value="Masculino">Masculino</option>
-                                                    <option value="Otro">Otro</option>
-                                                </select>
-                                            </div>
+    <section>
+        <div class="modal fade" id="ActualizarEmpleado" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="encabezado_modal" id="etiqueta_modal_modificar">Formulario Emleados</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+                        <form class="border">
+                            <div class="col-md-12">
+                                <!-- Datos Personales -->
+                                <div class="container mt-4">
+                                    <h5 class="label_modal">Datos Personales:</h5>
+                                    <div class="row mt-3">
+                                        <div class="col-md-3">
+                                            <label for="nombre">Nombre</label>
+                                            <input type="text" class="form-control" id="nombre_modificar">
                                         </div>
-                                        <div class="row mt-3">
-                                            <div class="col-md-3">
-                                                <label for="fecha_nacimiento">Fecha Nacimiento:</label>
-                                                <input type="date" class="form-control" id="fecha_nacimiento_modificar">
-                                            </div>
-                                            <div class="col-md-3">
-                                                <label for="rfc">RFC</label>
-                                                <input type="text" class="form-control" id="rfc_modificar">
-                                            </div>
-                                            <div class="col-md-3">
-                                                <label for="curp">CURP</label>
-                                                <input type="text" class="form-control" id="curp_modificar">
-                                            </div>
-                                            <div class="col-md-3">
-                                                <label for="domicilio">Domicilio</label>
-                                                <input type="text" class="form-control" id="domicilio_modificar">
-                                            </div>
+                                        <div class="col-md-3">
+                                            <label for="a_Paterno">Apellido Paterno</label>
+                                            <input type="text" class="form-control" id="a_Paterno_modificar">
                                         </div>
-                                        <div class="row mt-3">
-                                            <div class="col-md-3">
-                                                <label for="cp">Código Postal</label>
-                                                <input type="text" class="form-control" id="cp_modificar">
-                                            </div>
-                                            <div class="col-md-3">
-                                                <label for="ciudad">Ciudad</label>
-                                                <input type="text" class="form-control" id="ciudad_modificar">
-                                            </div>
-                                            <div class="col-md-3">
-                                                <label for="estado">Estado</label>
-                                                <input type="text" class="form-control" id="estado_modificar">
-                                            </div>
-                                            <div class="col-md-3">
-                                                <label for="telefono">Teléfono</label>
-                                                <input type="text" class="form-control" id="telefono_modificar">
-                                            </div>
+                                        <div class="col-md-3">
+                                            <label for="a_Materno">Apellido Materno</label>
+                                            <input type="text" class="form-control" id="a_Materno_modificar">
                                         </div>
-                                        <div class="row mt-3">
-                                            <div class="col-md-6">
-                                                <label for="numero_licencia">No. Licencia</label>
-                                                <input type="text" class="form-control" id="numero_licencia_modificar">
-                                            </div>
-                                            <div class="col-md-6">
-                                                <label for="tipo_licencia">Tipo de Licencia</label>
-                                                <input type="text" class="form-control" id="tipo_licencia_modificar">
-                                            </div>
+                                        <div class="col-md-3">
+                                            <label for="genero">Género</label>
+                                            <select class="form-control" id="genero_modificar" name="unidad">
+                                                <option value="" disabled selected>Selecciona</option>
+                                                <option value="Femenino">Femenino</option>
+                                                <option value="Masculino">Masculino</option>
+                                                <option value="Otro">Otro</option>
+                                            </select>
                                         </div>
-                                        <div class="row mt-3">
-                                            <div class="col-md-6">
-                                                <div class="sidebar ms-2 text-center pb-2"
-                                                     style="width: 186px; border-color: green">
-                                                    <div class="row mt-2">
-                                                        <div class="col-12">
-                                                            <img id="imgFoto_modificar" src="" style="width: 156px; height: 156px;" />
-                                                            <textarea id="textoFoto_modificar" style="width: 156px;"></textarea>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row mt-2">
-                                                        <div class="col-12">
-                                                            <button type="button" id="btnSeleccionarImagen_modificar"
-                                                                    class="btn btn-outline-success" >
-                                                                <i class="bi bi-upload"></i>&nbsp;&nbsp;
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row mt-2">
-                                                        <div class="col-12">
-                                                            <input id="inputFoto_modificar" type="file" />
-                                                        </div>
+                                    </div>
+                                    <div class="row mt-3">
+                                        <div class="col-md-3">
+                                            <label for="fecha_nacimiento">Fecha Nacimiento:</label>
+                                            <input type="date" class="form-control" id="fecha_nacimiento_modificar">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label for="rfc">RFC</label>
+                                            <input type="text" class="form-control" id="rfc_modificar">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label for="curp">CURP</label>
+                                            <input type="text" class="form-control" id="curp_modificar">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label for="domicilio">Domicilio</label>
+                                            <input type="text" class="form-control" id="domicilio_modificar">
+                                        </div>
+                                    </div>
+                                    <div class="row mt-3">
+                                        <div class="col-md-3">
+                                            <label for="cp">Código Postal</label>
+                                            <input type="text" class="form-control" id="cp_modificar">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label for="ciudad">Ciudad</label>
+                                            <input type="text" class="form-control" id="ciudad_modificar">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label for="estado">Estado</label>
+                                            <input type="text" class="form-control" id="estado_modificar">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label for="telefono">Teléfono</label>
+                                            <input type="text" class="form-control" id="telefono_modificar">
+                                        </div>
+                                    </div>
+                                    <div class="row mt-3">
+                                        <div class="col-md-6">
+                                            <label for="numero_licencia">No. Licencia</label>
+                                            <input type="text" class="form-control" id="numero_licencia_modificar">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="tipo_licencia">Tipo de Licencia</label>
+                                            <input type="text" class="form-control" id="tipo_licencia_modificar">
+                                        </div>
+                                    </div>
+                                    <div class="row mt-3">
+                                        <div class="col-md-6">
+                                            <div class="sidebar ms-2 text-center pb-2"
+                                                style="width: 186px; border-color: green">
+                                                <div class="row mt-2">
+                                                    <div class="col-12">
+                                                        <img id="imgFoto_modificar" src=""
+                                                            style="width: 156px; height: 156px;" />
+                                                        <textarea id="textoFoto_modificar"
+                                                            style="width: 156px;"></textarea>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-                                    <div class="container mt-4">
-                                        <h5 class="label_modal">Datos de Usuario:</h5>
-                                        <div class="row mt-3">
-                                            <div class="col-md-4">
-                                                <label for="usuario">Usuario</label>
-                                                <input type="text" class="form-control" id="usuario_modificar">
-                                            </div>
-                                            <div class="col-md-4">
-                                                <label for="contrasenia">Contraseña</label>
-                                                <input type="password" class="form-control" id="contrasenia_modificar">
-                                            </div>
-                                            <div class="col-md-4">
-                                                <label for="rol">Rol</label>
-                                                <input type="text" class="form-control" id="rol_modificar">
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-                                    <div class="container mt-4">
-                                        <h5 class="label_modal">Datos de Empleado:</h5>
-                                        <div class="row mt-3">
-                                            <div class="col-md-3">
-                                                <label for="codigoEmpleado">Código Empleado</label>
-                                                <input type="text" class="form-control" id="codigoEmpleado_modificar">
-                                            </div>
-                                            <div class="col-md-3">
-                                                <label for="fechaIngreso">Fecha Ingreso</label>
-                                                <input type="date" class="form-control" id="fechaIngreso_modificar">
-                                            </div>
-                                            <div class="col-md-3">
-                                                <label for="puesto">Puesto</label>
-                                                <input type="text" class="form-control" id="puesto_modificar">
-                                            </div>
-                                            <div class="col-md-3">
-                                                <label for="correo">Correo Electrónico</label>
-                                                <input type="email" class="form-control" id="correo_modificar">
-                                            </div>
-                                        </div>
-                                        <div class="row mt-3">
-                                            <div class="col-md-3">
-                                                <label for="estatus">Estatus</label>
-                                                <select class="form-control" id="estatus_modificar" name="estatus">
-                                                    <option value="" disabled selected>Selecciona</option>
-                                                    <option value="1">Activo</option>
-                                                    <option value="0">Inactivo</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-md-3">
-                                                <label for="comentario">Comentarios</label>
-                                                <input type="text" class="form-control" id="comentario_modificar">
-                                            </div>
-                                            <div class="col-md-3">
-                                                <label for="tipo_vehiculo">Tipo Vehículo</label>
-                                                <input type="text" class="form-control" id="tipo_vehiculo_modificar">
-                                            </div>
-                                            <div class="col-md-3">
-                                                <label for="num_placa">Número Placa</label>
-                                                <input type="text" class="form-control" id="num_placa_modificar">
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="container mt-4">
-                                        <h5 class="label_modal">Expediente</h5>
-                                        <div class="row mt-3">
-                                            <div class="col-md-6">
-                                                <label for="expediente">Nombre del archivo:</label>
-
-                                            </div>
-                                            <div class="col-md-6">
-                                                <input type="text" class="form-control" id="nombre_expediente_modificar">
-                                            </div>
-
-                                        </div>
-                                        <div class="row mt-3">
-                                            <div class="col-md-12">
-                                                <input type="file" class="form-control" id="expediente_modificar" accept=".pdf">
-                                                <div id="pdfPreviewContainer_modificar" style="margin-top: 20px;">
-                                                    <iframe id="expediente_modificar" style="width: 50%; height: 50px;"
-                                                            frameborder="0"></iframe>
+                                                <div class="row mt-2">
+                                                    <div class="col-12">
+                                                        <button type="button" id="btnSeleccionarImagen_modificar"
+                                                            class="btn btn-outline-success">
+                                                            <i class="bi bi-upload"></i>&nbsp;&nbsp;
+                                                        </button>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="container mt-4">
-                                        <h5 class="label_modal">Otros Documentos:</h5>
-                                        <div class="row mt-3">
-                                            <div class="col-md-6">
-                                                <label for="alta_imss_empleado">Alta del IMSS del Empleado:</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <input type="text" class="form-control" id="nombre_archivo_imss_modificar"
-                                                       value="nombre del arcivo">
-                                            </div>
-                                        </div>
-                                        <div class="row mt-3">
-                                            <div class="col-md-12">
-                                                <input type="file" class="form-control" id="alta_imss_empleado_modificar"
-                                                       accept=".pdf">
-                                                <div id="pdfPreviewContainer" style="margin-top: 20px;">
-                                                    <iframe id="alta_imss_empleado_modificar" style="width: 50%; height: 50px;"
-                                                            frameborder="0"></iframe>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row mt-3">
-                                            <div class="col-md-6">
-                                                <label for="nomina">Nómina:</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <input type="text" class="form-control" id="nombre_archivo_nomina_modificar"
-                                                       value="nombre del arcivo">
-                                            </div>
-                                        </div>
-                                        <div class="row mt-3">
-                                            <div class="col-md-12">
-                                                <input type="file" class="form-control" id="nomina_modificar" accept=".pdf">
-                                                <div id="pdfPreviewContainer" style="margin-top: 20px;">
-                                                    <iframe id="nomina_modificar" style="width: 50%; height: 50px;"
-                                                            frameborder="0"></iframe>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row mt-3">
-                                            <div class="col-md-6">
-                                                <label for="vacaciones">Formato Vacaciones:</label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <input type="text" class="form-control" id="nombre_vacaciones_modificar"
-                                                       value="nombre del arcivo">
-                                            </div>
-                                        </div>
-                                        <div class="row mt-3">
-                                            <div class="col-md-12">
-                                                <input type="file" class="form-control" id="formato_vacaciones_modificar"
-                                                       accept=".pdf">
-                                                <div id="pdfPreviewContainer" style="margin-top: 20px;">
-                                                    <iframe id="formato_vacaciones_modificar" style="width: 50%; height: 50px;"
-                                                            frameborder="0"></iframe>
+                                                <div class="row mt-2">
+                                                    <div class="col-12">
+                                                        <input id="inputFoto_modificar_file" type="file" />
+                                                        <input class="" type="text" value="" id="inputFoto_modificar">
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                <!-- Campos ocultos -->
-                                <input type="hidden" id="idPersona_modificar">
-                                <input type="hidden" id="idUsuario_modificar">
-                                <input type="hidden" id="idEmpleado_modificar">
 
-                                <!-- Botones del formulario -->
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-                                    <button type="button" class="btn btn-warning" id="btnModificar">Modificar</button>
+                                <div class="container mt-4">
+                                    <h5 class="label_modal">Datos de Usuario:</h5>
+                                    <div class="row mt-3">
+                                        <div class="col-md-4">
+                                            <label for="usuario">Usuario</label>
+                                            <input type="text" class="form-control" id="usuario_modificar">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="contrasenia">Contraseña</label>
+                                            <input type="password" class="form-control" id="contrasenia_modificar">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="rol">Rol</label>
+                                            <input type="text" class="form-control" id="rol_modificar">
+                                        </div>
+                                    </div>
                                 </div>
-                            </form>
-                        </div>
+
+
+                                <div class="container mt-4">
+                                    <h5 class="label_modal">Datos de Empleado:</h5>
+                                    <div class="row mt-3">
+                                        <div class="col-md-3">
+                                            <label for="codigoEmpleado">Código Empleado</label>
+                                            <input type="text" class="form-control" id="codigoEmpleado_modificar">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label for="fechaIngreso">Fecha Ingreso</label>
+                                            <input type="date" class="form-control" id="fechaIngreso_modificar">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label for="puesto">Puesto</label>
+                                            <input type="text" class="form-control" id="puesto_modificar">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label for="correo">Correo Electrónico</label>
+                                            <input type="email" class="form-control" id="correo_modificar">
+                                        </div>
+                                    </div>
+                                    <div class="row mt-3">
+                                        <div class="col-md-3">
+                                            <label for="estatus">Estatus</label>
+                                            <select class="form-control" id="estatus_modificar" name="estatus">
+                                                <option value="" disabled selected>Selecciona</option>
+                                                <option value="1">Activo</option>
+                                                <option value="0">Inactivo</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label for="comentario">Comentarios</label>
+                                            <input type="text" class="form-control" id="comentario_modificar">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label for="tipo_vehiculo">Tipo Vehículo</label>
+                                            <input type="text" class="form-control" id="tipo_vehiculo_modificar">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label for="num_placa">Número Placa</label>
+                                            <input type="text" class="form-control" id="num_placa_modificar">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="container mt-4">
+                                    <h5 class="label_modal">Expediente</h5>
+                                    <div class="row mt-3">
+                                        <div class="col-md-6">
+                                            <label for="expediente">Nombre del archivo:</label>
+
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input type="text" class="form-control" id="nombre_expediente_modificar">
+                                        </div>
+
+                                    </div>
+                                    <div class="row mt-3">
+                                        <div class="col-md-12">
+                                            <input type="file" class="form-control" id="expediente_modificar_file"
+                                                accept=".pdf">
+                                            <input type="text" id="expediente_modificar">
+                                            <div id="pdfPreviewContainer_modificar" style="margin-top: 20px;">
+                                                <iframe id="expediente_modificar" style="width: 50%; height: 50px;"
+                                                    frameborder="0"></iframe>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="container mt-4">
+                                    <h5 class="label_modal">Otros Documentos:</h5>
+                                    <div class="row mt-3">
+                                        <div class="col-md-6">
+                                            <label for="alta_imss_empleado">Alta del IMSS del Empleado:</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input type="text" class="form-control" id="nombre_archivo_imss_modificar"
+                                                value="nombre del arcivo">
+                                        </div>
+                                    </div>
+                                    <div class="row mt-3">
+                                        <div class="col-md-12">
+                                            <input type="file" class="form-control"
+                                                id="alta_imss_empleado_modificar_file" accept=".pdf">
+                                            <input type="text" id="alta_imss_empleado_modificar">
+                                            <div id="pdfPreviewContainer" style="margin-top: 20px;">
+                                                <iframe id="alta_imss_empleado_modificar"
+                                                    style="width: 50%; height: 50px;" frameborder="0"></iframe>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-3">
+                                        <div class="col-md-6">
+                                            <label for="nomina">Nómina:</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input type="text" class="form-control" id="nombre_archivo_nomina_modificar"
+                                                value="nombre del arcivo">
+                                        </div>
+                                    </div>
+                                    <div class="row mt-3">
+                                        <div class="col-md-12">
+                                            <input type="file" class="form-control" id="nomina_modificar_file"
+                                                accept=".pdf">
+                                            <input type="text" id="nomina_modificar">
+                                            <div id="pdfPreviewContainer" style="margin-top: 20px;">
+                                                <iframe id="nomina_modificar" style="width: 50%; height: 50px;"
+                                                    frameborder="0"></iframe>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mt-3">
+                                        <div class="col-md-6">
+                                            <label for="vacaciones">Formato Vacaciones:</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input type="text" class="form-control" id="nombre_vacaciones_modificar"
+                                                value="nombre del arcivo">
+                                        </div>
+                                    </div>
+                                    <div class="row mt-3">
+                                        <div class="col-md-12">
+                                            <input type="file" class="form-control" id="formato_vacaciones_modificar_file"
+                                                accept=".pdf">
+                                            <input type="text" id="formato_vacaciones_modificar">
+                                            <div id="pdfPreviewContainer" style="margin-top: 20px;">
+                                                <iframe id="formato_vacaciones_modificar"
+                                                    style="width: 50%; height: 50px;" frameborder="0"></iframe>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Campos ocultos -->
+                            <input type="hidden" id="idPersona_modificar">
+                            <input type="hidden" id="idUsuario_modificar">
+                            <input type="hidden" id="idEmpleado_modificar">
+
+                            <!-- Botones del formulario -->
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                <button type="button" class="btn btn-warning" id="btnModificar">Modificar</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-        <script src="../js/nav_bar.js" type="text/javascript"></script>
-        <script src="../js/empleado.js" type="module"></script>
-    </body>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="../js/nav_bar.js" type="text/javascript"></script>
+    <script src="../js/empleado.js" type="module"></script>
+</body>
 
 </html>
