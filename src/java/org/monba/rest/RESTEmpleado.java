@@ -68,14 +68,26 @@ public class RESTEmpleado {
     }
 
     @Path("activar")
-    @GET
+    @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public Response activar(@QueryParam("id_empleado") @DefaultValue("0") String id_empleado) throws ClassNotFoundException {
+    public Response activar(@FormParam("id_empleado") @DefaultValue("") String empleado) {
+        String out = "";
         Empleado e = new Empleado();
-        e.setId_empleado(Integer.parseInt(id_empleado));
-        ControllerEmpleado objCE = new ControllerEmpleado();
-        objCE.activar(e);
-        String out = "{\"response\":\"OK\"}";
+        Gson gson = new Gson();
+        ControllerEmpleado ce = new ControllerEmpleado();
+        
+        try {
+            e = gson.fromJson(empleado, Empleado.class);
+            ce.activar(e);
+            out = """
+                  {"response" : "OK"}
+                  """;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            out = """
+                  {"response" : "ERROR"}
+                  """;
+        }
         return Response.ok(out).build();
     }
 
